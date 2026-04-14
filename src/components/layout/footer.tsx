@@ -6,8 +6,10 @@ const quickLinks = [
   { label: "About Us", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Careers", href: "/careers" },
+  { label: "FAQ", href: "/faq" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
+  { label: "Feedback & Complaints", href: "/feedback" },
 ];
 
 const serviceLinks = [
