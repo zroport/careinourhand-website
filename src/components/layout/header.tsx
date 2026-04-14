@@ -103,7 +103,7 @@ export function Header() {
                 className="border-[#620E87] text-[#620E87] hover:bg-[#620E87] hover:text-white transition-colors"
                 asChild
               >
-                <Link href="/contact">Book Now</Link>
+                <Link href="/booking">Book Now</Link>
               </Button>
               <Button
                 size="sm"
@@ -124,7 +124,7 @@ export function Header() {
                 className="border-[#620E87] text-[#620E87] hover:bg-[#620E87] hover:text-white"
                 asChild
               >
-                <Link href="/contact">Book Now</Link>
+                <Link href="/booking">Book Now</Link>
               </Button>
 
               <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
@@ -170,7 +170,7 @@ export function Header() {
                         asChild
                         onClick={() => setMobileOpen(false)}
                       >
-                        <Link href="/contact">Book Now</Link>
+                        <Link href="/booking">Book Now</Link>
                       </Button>
                       <Button
                         className="w-full bg-[#89C541] hover:bg-[#6da033] text-gray-900 font-semibold border-0"
