@@ -1,0 +1,29 @@
+import type { Metadata } from "next";
+import { ServicesHero } from "@/components/services/services-hero";
+import { ServicesListingGrid } from "@/components/services/services-listing-grid";
+import { ServicesCta } from "@/components/services/services-cta";
+
+export const metadata: Metadata = {
+  title: "NDIS Services | Care In Our Hand",
+  description:
+    "Explore our full range of NDIS support services across Sydney — from personal care and community nursing to life skills, transport, and community participation. Person-centred care delivered with full NDIS Price Guide transparency.",
+  keywords: [
+    "NDIS services Sydney",
+    "disability support services",
+    "NDIS provider Leppington",
+    "personal care NDIS",
+    "community nursing NDIS",
+    "life skills support",
+    "NDIS transport Sydney",
+  ],
+};
+
+export default function ServicesPage() {
+  return (
+    <>
+      <ServicesHero />
+      <ServicesListingGrid />
+      <ServicesCta />
+    </>
+  );
+}
