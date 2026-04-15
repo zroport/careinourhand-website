@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import {
   Phone,
   Mail,
@@ -31,6 +32,12 @@ const navLinks = [
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+
+  function isActive(href: string) {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  }
 
   return (
     <header className="sticky top-0 z-50 w-full shadow-md">
@@ -87,7 +94,12 @@ export function Header() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:text-[#620E87] hover:bg-purple-50 transition-colors"
+                    aria-current={isActive(link.href) ? "page" : undefined}
+                    className={
+                      isActive(link.href)
+                        ? "px-3 py-2 text-sm font-semibold text-[#620E87] border-b-2 border-[#89C541] rounded-t-md transition-colors"
+                        : "px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:text-[#620E87] hover:bg-purple-50 transition-colors"
+                    }
                   >
                     {link.label}
                   </Link>
@@ -157,7 +169,12 @@ export function Header() {
                         key={link.href}
                         href={link.href}
                         onClick={() => setMobileOpen(false)}
-                        className="px-3 py-2.5 text-sm font-medium text-gray-700 rounded-lg hover:text-[#620E87] hover:bg-purple-50 transition-colors"
+                        aria-current={isActive(link.href) ? "page" : undefined}
+                        className={
+                          isActive(link.href)
+                            ? "px-3 py-2.5 text-sm font-semibold text-[#620E87] bg-green-50 border-l-4 border-[#89C541] rounded-r-lg transition-colors"
+                            : "px-3 py-2.5 text-sm font-medium text-gray-700 rounded-lg hover:text-[#620E87] hover:bg-purple-50 transition-colors"
+                        }
                       >
                         {link.label}
                       </Link>
