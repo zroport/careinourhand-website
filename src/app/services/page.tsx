@@ -1,3 +1,7 @@
+// Prevent SSG: Next.js 16 on Windows causes React dual-instance conflicts
+// in the static generation worker. Force dynamic rendering (SSR on request).
+export const dynamic = "force-dynamic";
+
 import type { Metadata } from "next";
 import { ServicesHero } from "@/components/services/services-hero";
 import { ServicesListingGrid } from "@/components/services/services-listing-grid";

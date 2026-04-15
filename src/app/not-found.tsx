@@ -1,3 +1,7 @@
+// Force dynamic rendering to avoid SSG React-dispatcher null bug (Windows
+// path-casing creates duplicate React instances in the static-generation worker).
+export const dynamic = "force-dynamic";
+
 import Link from "next/link";
 import { Home, ArrowLeft } from "lucide-react";
 

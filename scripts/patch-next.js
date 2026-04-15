@@ -45,7 +45,6 @@ const SOURCE_FILES = [
     "underlyingSearchParams || {}",
   ],
 ];
-];
 
 function makeCjsThrow() {
   return (
@@ -233,3 +232,8 @@ for (const filePath of COMPILED_BUNDLES) {
     `[patch-next] Patched ${matches.length} occurrence(s) in ${path.basename(filePath)} (minified)`
   );
 }
+
+// NOTE: Sharing ReactSharedInternals via globalThis was tested but caused
+// regressions (/_global-error prerender: "layout router not mounted" E56).
+// The root layout's `export const dynamic = "force-dynamic"` is the correct
+// fix for user pages on Windows. No further patches are needed here.

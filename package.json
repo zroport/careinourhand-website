@@ -7,6 +7,7 @@
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
+    "db:seed": "npx tsx prisma/seed.ts",
     "postinstall": "node scripts/patch-next.js"
   },
   "dependencies": {
