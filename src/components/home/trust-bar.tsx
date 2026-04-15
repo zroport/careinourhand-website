@@ -39,7 +39,7 @@ export function TrustBar() {
             return (
               <li
                 key={item.title}
-                className="flex items-center gap-3 sm:gap-4"
+                className="flex items-center gap-3 sm:gap-4 glass-card p-3 sm:p-4"
               >
                 <span
                   className="flex items-center justify-center size-10 sm:size-12 rounded-xl bg-[#620E87]/10 shrink-0"

@@ -44,7 +44,7 @@ export function MeetTheTeam() {
           {teamMembers.map((member) => (
             <article
               key={member.name}
-              className="flex flex-col items-center text-center p-8 rounded-2xl border border-gray-100 bg-gray-50 hover:bg-white hover:shadow-lg transition-all duration-200"
+              className="flex flex-col items-center text-center p-8 glass-card hover:shadow-lg transition-all duration-200"
               aria-label={`${member.name}, ${member.role}`}
             >
               {/* Avatar placeholder */}

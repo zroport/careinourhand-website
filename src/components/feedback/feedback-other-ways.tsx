@@ -10,7 +10,7 @@ export function FeedbackOtherWays() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Other ways */}
-          <Card>
+          <Card className="glass-card">
             <CardHeader className="border-b pb-4">
               <CardTitle className="text-base font-semibold text-gray-900">
                 Other Ways to Provide Feedback
@@ -51,8 +51,11 @@ export function FeedbackOtherWays() {
           </Card>
 
           {/* External complaints */}
-          <Card className="border-amber-200 bg-amber-50/30">
-            <CardHeader className="border-b border-amber-200 pb-4">
+          <Card
+            className="glass-card"
+            style={{ background: "rgba(255, 251, 235, 0.78)", border: "1px solid rgba(245,158,11,0.3)" }}
+          >
+            <CardHeader className="border-b border-amber-200/60 pb-4">
               <CardTitle className="text-base font-semibold text-gray-900">
                 External Complaints
               </CardTitle>

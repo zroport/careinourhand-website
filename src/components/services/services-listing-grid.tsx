@@ -44,7 +44,7 @@ export function ServicesListingGrid() {
                   className="block h-full group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#620E87] focus-visible:ring-offset-2 rounded-2xl"
                   aria-label={`Learn more about ${service.title}`}
                 >
-                  <Card className="h-full border border-gray-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200 bg-white rounded-2xl">
+                  <Card className="h-full shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200 glass-card">
                     <CardHeader className="pb-2">
                       <div className="flex items-start gap-3">
                         <span className="flex items-center justify-center size-11 rounded-xl bg-[#620E87]/10 group-hover:bg-[#620E87]/20 transition-colors shrink-0">

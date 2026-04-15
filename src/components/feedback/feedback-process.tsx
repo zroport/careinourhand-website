@@ -26,7 +26,10 @@ export function FeedbackProcess() {
   return (
     <section className="py-12 bg-white" aria-labelledby="feedback-process-heading">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Card className="border-[#620E87]/20 bg-purple-50/40">
+        <Card
+          className="glass-card"
+          style={{ background: "rgba(250, 245, 255, 0.78)", border: "1px solid rgba(98,14,135,0.15)" }}
+        >
           <CardContent className="pt-8 pb-8">
             <h2
               id="feedback-process-heading"

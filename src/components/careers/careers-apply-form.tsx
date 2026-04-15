@@ -74,7 +74,7 @@ export const CareersApplyForm = forwardRef<HTMLElement, CareersApplyFormProps>(
     if (submitted) {
       return (
         <section ref={ref} id="apply" aria-labelledby="apply-success-heading">
-          <Card>
+          <Card className="glass-card">
             <CardContent className="py-12 text-center">
               <div className="flex justify-center mb-5">
                 <span className="flex items-center justify-center size-16 rounded-full bg-green-100">
@@ -110,7 +110,7 @@ export const CareersApplyForm = forwardRef<HTMLElement, CareersApplyFormProps>(
 
     return (
       <section ref={ref} id="apply" aria-labelledby="apply-form-heading">
-        <Card>
+        <Card className="glass-card">
           <CardHeader className="border-b">
             <CardTitle id="apply-form-heading" className="text-xl font-semibold text-gray-900">
               Apply Now

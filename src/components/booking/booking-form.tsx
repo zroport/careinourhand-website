@@ -118,7 +118,7 @@ export function BookingForm() {
 
   if (submitted) {
     return (
-      <Card className="max-w-2xl mx-auto">
+      <Card className="max-w-2xl mx-auto glass-card">
         <CardContent className="py-12 text-center">
           <div className="flex justify-center mb-5">
             <span className="flex items-center justify-center size-16 rounded-full bg-green-100">

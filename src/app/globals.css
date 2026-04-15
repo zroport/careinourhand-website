@@ -138,3 +138,21 @@
     @apply font-sans;
   }
 }
+
+/* Glassmorphism utilities — unlayered so they win over Tailwind bg/border utilities */
+.glass-card {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 16px;
+}
+
+/* For cards placed on dark/coloured backgrounds (hero sections, CTA banners) */
+.glass-card-dark {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+}

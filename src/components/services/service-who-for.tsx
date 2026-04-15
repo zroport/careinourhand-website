@@ -22,11 +22,11 @@ export function ServiceWhoFor({ service }: ServiceWhoForProps) {
           </h2>
 
           <div
-            className="flex items-start gap-4 rounded-2xl p-6 sm:p-8"
+            className="flex items-start gap-4 glass-card p-6 sm:p-8"
             style={{
               background:
-                "linear-gradient(135deg, #f5e8ff 0%, #ede0f7 50%, #e8d5f5 100%)",
-              border: "1px solid #d4b3e8",
+                "linear-gradient(135deg, rgba(245,232,255,0.85) 0%, rgba(237,224,247,0.85) 50%, rgba(232,213,245,0.85) 100%)",
+              border: "1px solid rgba(212,179,232,0.55)",
             }}
             role="note"
             aria-label="Who this service is for"

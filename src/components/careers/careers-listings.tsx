@@ -35,7 +35,7 @@ export function CareersListings({ onApply }: CareersListingsProps) {
             return (
               <Card
                 key={job.id}
-                className="overflow-hidden border-gray-200 hover:border-[#620E87]/30 transition-colors"
+                className="overflow-hidden transition-colors glass-card"
               >
                 {/* Summary row — always visible */}
                 <button

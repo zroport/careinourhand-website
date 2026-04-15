@@ -29,7 +29,7 @@ export function ServiceProvides({ service }: ServiceProvidesProps) {
             {service.whatWeProvide.map((item) => (
               <li
                 key={item}
-                className="flex items-start gap-3 bg-white rounded-xl p-4 ring-1 ring-gray-100 shadow-sm"
+                className="flex items-start gap-3 p-4 shadow-sm glass-card"
               >
                 <CheckCircle2
                   className="size-5 text-[#89C541] shrink-0 mt-0.5"

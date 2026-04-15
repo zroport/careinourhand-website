@@ -63,7 +63,7 @@ export function Testimonials() {
           {testimonials.map((t) => (
             <Card
               key={t.name}
-              className="relative bg-white border border-gray-100 shadow-sm rounded-2xl hover:shadow-md transition-shadow duration-200 overflow-visible"
+              className="relative shadow-sm hover:shadow-md transition-shadow duration-200 overflow-visible glass-card"
             >
               {/* Large decorative quote mark */}
               <div

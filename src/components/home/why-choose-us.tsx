@@ -50,7 +50,7 @@ export function WhyChooseUs() {
             return (
               <div
                 key={feature.title}
-                className="relative flex flex-col items-center text-center p-8 rounded-2xl border border-gray-100 bg-gray-50 hover:bg-white hover:shadow-lg transition-all duration-200 group"
+                className="relative flex flex-col items-center text-center p-8 glass-card hover:shadow-lg transition-all duration-200 group"
               >
                 {/* Step number */}
                 <span

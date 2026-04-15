@@ -47,7 +47,7 @@ export function CareersBenefits() {
             return (
               <Card
                 key={benefit.title}
-                className="text-center hover:shadow-md transition-shadow border-gray-100"
+                className="text-center hover:shadow-md transition-shadow glass-card"
               >
                 <CardContent className="pt-8 pb-7">
                   <div className="flex justify-center mb-4">

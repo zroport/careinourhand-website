@@ -87,7 +87,7 @@ export function FeedbackForm() {
 
   if (submitted) {
     return (
-      <Card>
+      <Card className="glass-card">
         <CardContent className="py-12 text-center">
           <div className="flex justify-center mb-5">
             <span className="flex items-center justify-center size-16 rounded-full bg-green-100">
@@ -118,7 +118,7 @@ export function FeedbackForm() {
   }
 
   return (
-    <Card>
+    <Card className="glass-card">
       <CardHeader className="border-b">
         <CardTitle className="text-xl font-semibold text-gray-900">
           Share Your Feedback

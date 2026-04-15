@@ -41,7 +41,7 @@ export function ServiceDescription({ service }: ServiceDescriptionProps) {
 
           {/* Right: Sidebar card */}
           <aside aria-label="Service details">
-            <Card className="border border-gray-200 shadow-sm rounded-2xl bg-white sticky top-6">
+            <Card className="shadow-sm sticky top-6 glass-card">
               <CardContent className="pt-6 pb-6 space-y-5">
                 {/* NDIS Category */}
                 <div className="flex items-start gap-3">

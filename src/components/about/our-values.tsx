@@ -49,7 +49,7 @@ export function OurValues() {
             return (
               <div
                 key={value.title}
-                className="flex flex-col items-center text-center p-8 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200"
+                className="flex flex-col items-center text-center p-8 glass-card shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200"
               >
                 {/* Icon container */}
                 <div

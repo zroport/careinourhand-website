@@ -15,10 +15,10 @@ function AccordionItem({
   onToggle: () => void
 }) {
   return (
-    <div className="border border-gray-200 rounded-xl overflow-hidden">
+    <div className="overflow-hidden glass-card">
       <button
         type="button"
-        className="flex items-center justify-between w-full px-5 py-4 text-left bg-white hover:bg-purple-50/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#620E87] focus-visible:ring-inset"
+        className="flex items-center justify-between w-full px-5 py-4 text-left hover:bg-purple-50/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#620E87] focus-visible:ring-inset"
         onClick={onToggle}
         aria-expanded={isOpen}
         aria-controls={`faq-answer-${faq.id}`}
