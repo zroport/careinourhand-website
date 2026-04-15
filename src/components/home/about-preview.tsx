@@ -12,7 +12,8 @@ const stats = [
 export function AboutPreview() {
   return (
     <section
-      className="py-20 bg-white"
+      className="py-20"
+      style={{ background: 'linear-gradient(135deg, #ffffff 0%, #f8f5fc 100%)' }}
       aria-labelledby="about-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -17,7 +17,11 @@ export function CareersListings({ onApply }: CareersListingsProps) {
   const toggle = (id: string) => setOpenId((prev) => (prev === id ? null : id))
 
   return (
-    <section className="py-16 sm:py-20 bg-gray-50" aria-labelledby="openings-heading">
+    <section
+      className="py-16 sm:py-20 section-blob-purple"
+      style={{ background: 'linear-gradient(135deg, #f5f0f9 0%, #f8f5fc 100%)' }}
+      aria-labelledby="openings-heading"
+    >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2
           id="openings-heading"
@@ -40,7 +44,7 @@ export function CareersListings({ onApply }: CareersListingsProps) {
                 {/* Summary row — always visible */}
                 <button
                   type="button"
-                  className="w-full text-left px-6 py-5 flex items-start justify-between gap-4 bg-white hover:bg-purple-50/30 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#620E87] focus-visible:ring-inset"
+                  className="w-full text-left px-6 py-5 flex items-start justify-between gap-4 bg-white/80 hover:bg-purple-50/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#620E87] focus-visible:ring-inset"
                   onClick={() => toggle(job.id)}
                   aria-expanded={isOpen}
                   aria-controls={`job-details-${job.id}`}

@@ -24,7 +24,8 @@ const values = [
 export function OurValues() {
   return (
     <section
-      className="py-20 sm:py-24 bg-gray-50"
+      className="py-20 sm:py-24 section-blob-green"
+      style={{ background: 'linear-gradient(135deg, #f0f9f0 0%, #fafcf8 100%)' }}
       aria-labelledby="our-values-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

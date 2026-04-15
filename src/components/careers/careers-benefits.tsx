@@ -30,7 +30,11 @@ const benefits = [
 
 export function CareersBenefits() {
   return (
-    <section className="py-16 sm:py-20 bg-white" aria-labelledby="benefits-heading">
+    <section
+      className="py-16 sm:py-20 section-blob-both"
+      style={{ background: 'linear-gradient(135deg, #faf5ff 0%, #ffffff 50%, #f5faf0 100%)' }}
+      aria-labelledby="benefits-heading"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2
           id="benefits-heading"

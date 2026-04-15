@@ -9,6 +9,7 @@ export function ServiceWhoFor({ service }: ServiceWhoForProps) {
   return (
     <section
       className="py-12 sm:py-16"
+      style={{ background: 'linear-gradient(135deg, #f5f0f9 0%, #faf5ff 100%)' }}
       aria-labelledby="who-for-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

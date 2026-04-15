@@ -14,6 +14,7 @@ export function ServiceDescription({ service }: ServiceDescriptionProps) {
   return (
     <section
       className="py-16 sm:py-20"
+      style={{ background: 'linear-gradient(135deg, #f8f5fc 0%, #ffffff 100%)' }}
       aria-labelledby="description-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

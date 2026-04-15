@@ -86,7 +86,8 @@ const services = [
 export function ServicesGrid() {
   return (
     <section
-      className="py-20 bg-gray-50"
+      className="py-20 section-blob-purple"
+      style={{ backgroundColor: '#f8f5fc' }}
       aria-labelledby="services-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

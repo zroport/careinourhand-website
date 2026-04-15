@@ -18,7 +18,8 @@ const teamMembers = [
 export function MeetTheTeam() {
   return (
     <section
-      className="py-20 sm:py-24 bg-white"
+      className="py-20 sm:py-24 section-blob-both"
+      style={{ background: 'linear-gradient(135deg, #f8f5fc 0%, #f5faf0 100%)' }}
       aria-labelledby="team-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

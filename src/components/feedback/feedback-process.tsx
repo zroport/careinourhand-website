@@ -24,7 +24,11 @@ const steps = [
 
 export function FeedbackProcess() {
   return (
-    <section className="py-12 bg-white" aria-labelledby="feedback-process-heading">
+    <section
+      className="py-12 section-blob-purple"
+      style={{ background: 'linear-gradient(135deg, #faf5ff 0%, #ffffff 100%)' }}
+      aria-labelledby="feedback-process-heading"
+    >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <Card
           className="glass-card"

@@ -19,7 +19,10 @@ export default function FeedbackPage() {
     <>
       <FeedbackHero />
       <FeedbackProcess />
-      <section className="py-12 bg-white">
+      <section
+        className="py-12 section-blob-green"
+        style={{ background: 'linear-gradient(135deg, #f5faf0 0%, #ffffff 100%)' }}
+      >
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <FeedbackForm />
         </div>

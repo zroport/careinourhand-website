@@ -75,7 +75,11 @@ export function FaqAccordion() {
   const toggle = (id: string) => setOpenId((prev) => (prev === id ? null : id))
 
   return (
-    <section className="py-16 sm:py-20 bg-white" aria-labelledby="faq-section-heading">
+    <section
+      className="py-16 sm:py-20 section-blob-both"
+      style={{ background: 'linear-gradient(135deg, #f8f5fc 0%, #ffffff 55%, #f5f0f9 100%)' }}
+      aria-labelledby="faq-section-heading"
+    >
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 id="faq-section-heading" className="sr-only">
           All frequently asked questions

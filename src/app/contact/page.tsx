@@ -23,7 +23,11 @@ export default function ContactPage() {
   return (
     <>
       <ContactPageHero />
-      <section className="py-12 sm:py-16 bg-gray-50/50" aria-label="Contact section">
+      <section
+        className="py-12 sm:py-16 section-blob-both"
+        style={{ background: 'linear-gradient(135deg, #f8f5fc 0%, #ffffff 50%, #f5faf0 100%)' }}
+        aria-label="Contact section"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
             <div className="lg:col-span-2">

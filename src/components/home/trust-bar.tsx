@@ -26,7 +26,8 @@ const trustItems = [
 export function TrustBar() {
   return (
     <section
-      className="bg-gray-50 border-y border-gray-100 py-6"
+      className="section-blob-both border-y border-purple-100/60 py-6"
+      style={{ background: 'linear-gradient(90deg, rgba(245,240,249,0.6) 0%, #ffffff 40%, rgba(240,249,240,0.6) 100%)' }}
       aria-label="Trust indicators"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

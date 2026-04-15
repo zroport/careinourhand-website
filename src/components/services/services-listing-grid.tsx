@@ -12,7 +12,8 @@ import { services, iconMap } from "@/data/services";
 export function ServicesListingGrid() {
   return (
     <section
-      className="py-20 bg-white"
+      className="py-20 section-blob-both"
+      style={{ backgroundColor: '#f8f5fc' }}
       aria-labelledby="services-grid-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
