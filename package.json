@@ -9,6 +9,7 @@
     "lint": "eslint",
     "db:seed": "npx tsx prisma/seed.ts",
     "seed:admin": "npx tsx prisma/seed-admin.ts",
+    "create:admin": "node scripts/create-admin.js",
     "postinstall": "node scripts/patch-next.js"
   },
   "dependencies": {
