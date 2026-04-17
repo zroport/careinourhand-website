@@ -10,6 +10,10 @@
     "db:seed": "npx tsx prisma/seed.ts",
     "seed:admin": "npx tsx prisma/seed-admin.ts",
     "create:admin": "node scripts/create-admin.js",
+    "seed:services": "node scripts/seed-services.js",
+    "seed:faqs": "node scripts/seed-faqs.js",
+    "seed:settings": "node scripts/seed-settings.js",
+    "seed:all": "npm run create:admin && npm run seed:services && npm run seed:faqs && npm run seed:settings",
     "postinstall": "node scripts/patch-next.js"
   },
   "dependencies": {
