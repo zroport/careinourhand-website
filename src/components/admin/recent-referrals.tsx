@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { formatRelativeDate } from "@/lib/format-date"
-import type { ReferralStatus } from "@prisma/client"
+type ReferralStatus = "NEW" | "IN_REVIEW" | "CONTACTED" | "ACCEPTED" | "DECLINED"
 
 interface Referral {
   id: string

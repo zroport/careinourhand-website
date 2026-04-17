@@ -3,7 +3,7 @@
 import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { revalidatePath } from "next/cache"
-import type { FeedbackStatus } from "@prisma/client"
+type FeedbackStatus = "RECEIVED" | "INVESTIGATING" | "RESOLVED"
 
 export async function updateFeedbackStatus(feedbackId: string, status: FeedbackStatus) {
   const session = await auth()

@@ -3,7 +3,7 @@
 import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { revalidatePath } from "next/cache"
-import type { ReferralStatus } from "@prisma/client"
+type ReferralStatus = "NEW" | "IN_REVIEW" | "CONTACTED" | "ACCEPTED" | "DECLINED"
 
 export async function updateReferralStatus(referralId: string, status: ReferralStatus) {
   const session = await auth()

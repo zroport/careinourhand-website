@@ -10,7 +10,8 @@ import { EmptyState } from "@/components/admin/empty-state"
 import { DetailModal, DetailField, DetailSection } from "@/components/admin/detail-modal"
 import { formatRelativeDate, formatDate } from "@/lib/format-date"
 import { updateFeedbackStatus } from "@/actions/admin/update-feedback"
-import type { FeedbackType, FeedbackStatus } from "@prisma/client"
+type FeedbackType = "COMPLIMENT" | "SUGGESTION" | "COMPLAINT"
+type FeedbackStatus = "RECEIVED" | "INVESTIGATING" | "RESOLVED"
 
 type FeedbackItem = {
   id: string

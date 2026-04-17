@@ -10,7 +10,7 @@ import { EmptyState } from "@/components/admin/empty-state"
 import { DetailModal, DetailField, DetailSection } from "@/components/admin/detail-modal"
 import { formatRelativeDate, formatDate } from "@/lib/format-date"
 import { updateBookingStatus } from "@/actions/admin/update-booking"
-import type { BookingStatus } from "@prisma/client"
+type BookingStatus = "PENDING" | "CONFIRMED" | "COMPLETED" | "CANCELLED"
 
 type Booking = {
   id: string

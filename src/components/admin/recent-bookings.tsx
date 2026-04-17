@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { formatDate, formatRelativeDate } from "@/lib/format-date"
-import type { BookingStatus } from "@prisma/client"
+type BookingStatus = "PENDING" | "CONFIRMED" | "COMPLETED" | "CANCELLED"
 
 interface Booking {
   id: string

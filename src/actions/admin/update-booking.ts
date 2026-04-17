@@ -3,7 +3,7 @@
 import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { revalidatePath } from "next/cache"
-import type { BookingStatus } from "@prisma/client"
+type BookingStatus = "PENDING" | "CONFIRMED" | "COMPLETED" | "CANCELLED"
 
 export async function updateBookingStatus(bookingId: string, status: BookingStatus) {
   const session = await auth()

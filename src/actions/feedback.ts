@@ -2,7 +2,7 @@
 
 import { z } from "zod"
 import { prisma } from "@/lib/prisma"
-import { FeedbackType } from "@prisma/client"
+type FeedbackType = "COMPLIMENT" | "SUGGESTION" | "COMPLAINT"
 
 const feedbackSchema = z.object({
   type: z.enum(["COMPLIMENT", "SUGGESTION", "COMPLAINT"] as const, {

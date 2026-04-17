@@ -2,7 +2,7 @@
 
 import { z } from "zod"
 import { prisma } from "@/lib/prisma"
-import { ManagementType } from "@prisma/client"
+type ManagementType = "SELF_MANAGED" | "PLAN_MANAGED" | "NDIA_MANAGED"
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 

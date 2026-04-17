@@ -10,7 +10,8 @@ import { EmptyState } from "@/components/admin/empty-state"
 import { DetailModal, DetailField, DetailSection } from "@/components/admin/detail-modal"
 import { formatRelativeDate, formatDate } from "@/lib/format-date"
 import { updateReferralStatus } from "@/actions/admin/update-referral"
-import type { ReferralStatus, ManagementType } from "@prisma/client"
+type ReferralStatus = "NEW" | "IN_REVIEW" | "CONTACTED" | "ACCEPTED" | "DECLINED"
+type ManagementType = "SELF_MANAGED" | "PLAN_MANAGED" | "NDIA_MANAGED"
 
 type Referral = {
   id: string
