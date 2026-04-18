@@ -16,6 +16,16 @@ export default async function ApplicationsPage() {
   const [applications, jobListings] = await Promise.all([
     prisma.jobApplication.findMany({
       orderBy: { createdAt: "desc" },
+      select: {
+        id: true,
+        fullName: true,
+        email: true,
+        phone: true,
+        jobId: true,
+        coverNote: true,
+        resume: true,
+        createdAt: true,
+      },
     }),
     prisma.jobListing.findMany({
       select: { id: true, title: true },

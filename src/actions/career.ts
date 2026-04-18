@@ -7,8 +7,10 @@ const careerSchema = z.object({
   jobId: z.string().optional(),
   fullName: z.string().min(1, "Full name is required"),
   email: z.string().email("Invalid email address"),
-  phone: z.string().min(1, "Phone number is required"),
+  phone: z.string().min(8, "Phone must be at least 8 characters"),
   coverNote: z.string().optional(),
+  // Temporary: stored as base64 data URI until MinIO file storage is configured
+  resume: z.string().min(1, "Resume is required"),
 })
 
 export type CareerFormData = z.infer<typeof careerSchema>
@@ -33,6 +35,7 @@ export async function submitApplication(data: CareerFormData): Promise<CareerAct
         email: v.email,
         phone: v.phone,
         coverNote: v.coverNote?.trim() || null,
+        resume: v.resume,
       },
     })
 

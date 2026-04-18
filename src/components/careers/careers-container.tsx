@@ -1,29 +1,41 @@
 "use client"
 
-import { useRef, useState } from "react"
-import { CareersListings } from "./careers-listings"
-import { CareersApplyForm } from "./careers-apply-form"
+import { useState } from "react"
+import { CareersListings, type DbJobListing } from "./careers-listings"
+import { CareersCta } from "./careers-cta"
+import { ApplyModal, type JobOption } from "./apply-modal"
 
-export function CareersContainer() {
-  const [selectedJobId, setSelectedJobId] = useState<string | undefined>(undefined)
-  const formRef = useRef<HTMLElement>(null)
+interface CareersContainerProps {
+  jobs: DbJobListing[]
+}
 
-  const handleApply = (jobId: string) => {
-    setSelectedJobId(jobId)
-    // Give React a tick to re-render with the new value, then scroll
-    setTimeout(() => {
-      formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
-    }, 50)
+export function CareersContainer({ jobs }: CareersContainerProps) {
+  const [modalOpen, setModalOpen] = useState(false)
+  const [selectedJob, setSelectedJob] = useState<{ id: string; title: string } | null>(null)
+
+  const openForJob = (jobId: string, jobTitle: string) => {
+    setSelectedJob({ id: jobId, title: jobTitle })
+    setModalOpen(true)
   }
+
+  const openGeneral = () => {
+    setSelectedJob(null)
+    setModalOpen(true)
+  }
+
+  const jobOptions: JobOption[] = jobs.map((j) => ({ id: j.id, title: j.title }))
 
   return (
     <>
-      <CareersListings onApply={handleApply} />
-      <section className="py-12 sm:py-16 bg-white">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <CareersApplyForm ref={formRef} preselectedJobId={selectedJobId} />
-        </div>
-      </section>
+      <CareersListings jobs={jobs} onApply={openForJob} />
+      <CareersCta onGeneralApply={openGeneral} hasJobs={jobs.length > 0} />
+      <ApplyModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        jobs={jobOptions}
+        defaultJobId={selectedJob?.id}
+        defaultJobTitle={selectedJob?.title}
+      />
     </>
   )
 }

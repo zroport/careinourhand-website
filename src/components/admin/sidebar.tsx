@@ -16,6 +16,7 @@ import {
   Settings,
   Menu,
   X,
+  ClipboardList,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { SignOutButton } from "@/components/admin/sign-out-button"
@@ -54,6 +55,7 @@ const navSections: NavSection[] = [
       { label: "Blog Posts", href: "/admin/blog", icon: FileText },
       { label: "Services", href: "/admin/services", icon: LayoutGrid },
       { label: "FAQs", href: "/admin/faqs", icon: HelpCircle },
+      { label: "Job Listings", href: "/admin/jobs", icon: ClipboardList },
     ],
   },
   {
