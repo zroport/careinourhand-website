@@ -33,7 +33,7 @@ export function Footer() {
               className="flex items-center gap-2 group"
               aria-label="Care In Our Hand — Home"
             >
-              <span className="flex items-center justify-center size-9 rounded-lg bg-[#620E87] group-hover:bg-[#7d1aab] transition-colors">
+              <span className="flex items-center justify-center size-9 rounded-lg bg-[#620E87] group-hover:bg-[#4e0b6b] transition-colors">
                 <Heart className="size-5 text-white" aria-hidden="true" />
               </span>
               <span className="text-white font-bold text-lg leading-tight">

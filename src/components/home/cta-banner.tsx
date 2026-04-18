@@ -56,7 +56,7 @@ export function CtaBanner() {
           </Button>
           <Button
             size="lg"
-            className="bg-[#620E87] hover:bg-[#7d1aab] text-white font-semibold border-0 rounded-xl px-8 h-12 text-base shadow-md transition-all"
+            className="bg-[#620E87] hover:bg-[#4e0b6b] active:bg-[#3a0850] text-white font-semibold border-0 rounded-xl px-8 h-12 text-base shadow-md transition-all"
             asChild
           >
             <Link

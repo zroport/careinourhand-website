@@ -16,7 +16,7 @@ interface ServiceRelatedProps {
 export function ServiceRelated({ relatedServices }: ServiceRelatedProps) {
   return (
     <section
-      className="py-16 sm:py-20 bg-gray-50"
+      className="py-12 sm:py-16 bg-gray-50"
       aria-labelledby="related-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

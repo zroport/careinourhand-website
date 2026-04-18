@@ -76,7 +76,7 @@ export function FaqAccordion() {
 
   return (
     <section
-      className="py-16 sm:py-20 section-blob-both"
+      className="py-12 sm:py-16 section-blob-both"
       style={{ background: 'linear-gradient(135deg, #f8f5fc 0%, #ffffff 55%, #f5f0f9 100%)' }}
       aria-labelledby="faq-section-heading"
     >

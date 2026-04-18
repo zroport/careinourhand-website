@@ -172,7 +172,7 @@ export function AdminSidebar({ userName, userEmail }: SidebarProps) {
       {/* Mobile drawer */}
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-50 w-64 glass-card rounded-none border-r transition-transform duration-300 lg:hidden shadow-2xl",
+          "fixed inset-y-0 left-0 z-50 w-64 admin-sidebar-bg glass-card rounded-none border-r transition-transform duration-300 lg:hidden shadow-2xl",
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         )}
         aria-label="Admin sidebar"
@@ -189,7 +189,7 @@ export function AdminSidebar({ userName, userEmail }: SidebarProps) {
 
       {/* Desktop sidebar */}
       <aside
-        className="hidden lg:flex flex-col w-64 shrink-0 glass-card rounded-none border-r h-screen sticky top-0"
+        className="hidden lg:flex flex-col w-64 shrink-0 admin-sidebar-bg glass-card rounded-none border-r h-screen sticky top-0"
         aria-label="Admin sidebar"
       >
         <SidebarContent />

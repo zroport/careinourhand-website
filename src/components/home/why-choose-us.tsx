@@ -24,13 +24,13 @@ const features = [
 export function WhyChooseUs() {
   return (
     <section
-      className="py-20 section-blob-green"
+      className="py-12 sm:py-16 section-blob-green"
       style={{ backgroundColor: '#f5faf0' }}
       aria-labelledby="why-choose-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <h2
             id="why-choose-heading"
             className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3"
@@ -45,7 +45,7 @@ export function WhyChooseUs() {
         </div>
 
         {/* Feature columns */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (

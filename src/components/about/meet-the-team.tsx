@@ -18,13 +18,13 @@ const teamMembers = [
 export function MeetTheTeam() {
   return (
     <section
-      className="py-20 sm:py-24 section-blob-both"
+      className="py-12 sm:py-16 section-blob-both"
       style={{ background: 'linear-gradient(135deg, #f8f5fc 0%, #f5faf0 100%)' }}
       aria-labelledby="team-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <span className="inline-block text-xs font-semibold tracking-widest text-[#89C541] uppercase mb-3">
             The Team
           </span>

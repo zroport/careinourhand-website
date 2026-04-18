@@ -22,7 +22,7 @@ export default function NotFound() {
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link
             href="/"
-            className="inline-flex items-center justify-center gap-2 bg-[#620E87] hover:bg-[#7d1aab] text-white font-semibold px-6 py-2.5 rounded-xl transition-colors text-sm"
+            className="inline-flex items-center justify-center gap-2 bg-[#620E87] hover:bg-[#4e0b6b] active:bg-[#3a0850] text-white font-semibold px-6 py-2.5 rounded-xl transition-all duration-200 text-sm"
             aria-label="Return to homepage"
           >
             <Home className="size-4" aria-hidden="true" />

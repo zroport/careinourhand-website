@@ -12,13 +12,13 @@ import { services, iconMap } from "@/data/services";
 export function ServicesListingGrid() {
   return (
     <section
-      className="py-20 section-blob-both"
+      className="py-12 sm:py-16 section-blob-both"
       style={{ backgroundColor: '#f8f5fc' }}
       aria-labelledby="services-grid-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <h2
             id="services-grid-heading"
             className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3"
@@ -33,7 +33,7 @@ export function ServicesListingGrid() {
 
         {/* Services grid */}
         <ul
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
           role="list"
         >
           {services.map((service) => {

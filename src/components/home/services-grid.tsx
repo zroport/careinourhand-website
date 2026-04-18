@@ -87,12 +87,11 @@ export function ServicesGrid() {
   return (
     <section
       className="py-20 section-blob-purple"
-      style={{ backgroundColor: '#f8f5fc' }}
       aria-labelledby="services-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <h2
             id="services-heading"
             className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3"
@@ -106,12 +105,12 @@ export function ServicesGrid() {
           </p>
         </div>
 
-        {/* Services grid */}
+        {/* Services grid — first 6 only */}
         <ul
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
           role="list"
         >
-          {services.map((service) => {
+          {services.slice(0, 6).map((service) => {
             const Icon = service.icon;
             return (
               <li key={service.title}>
@@ -120,7 +119,7 @@ export function ServicesGrid() {
                   className="block h-full group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#620E87] focus-visible:ring-offset-2 rounded-2xl"
                   aria-label={`Learn more about ${service.title}`}
                 >
-                  <Card className="h-full shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 glass-card">
+                  <Card className="h-full shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 glass-card">
                     <CardHeader className="pb-2">
                       <div className="flex items-start gap-3">
                         <span className="flex items-center justify-center size-11 rounded-xl bg-[#620E87]/10 group-hover:bg-[#620E87]/20 transition-colors shrink-0">
@@ -150,12 +149,11 @@ export function ServicesGrid() {
           })}
         </ul>
 
-        {/* Bottom CTA */}
-        <div className="text-center mt-10">
+        {/* Single CTA — links to /services page */}
+        <div className="text-center mt-8">
           <Link
             href="/services"
-            className="inline-flex items-center gap-2 text-sm font-medium text-[#620E87] hover:text-[#7d1aab] border border-[#620E87]/30 hover:border-[#620E87] px-5 py-2.5 rounded-xl transition-colors"
-            aria-label="View all NDIS services we offer"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-white bg-[#620E87] hover:bg-[#4A0A66] px-6 py-2.5 rounded-xl transition-all duration-200 hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#620E87] focus-visible:ring-offset-2 min-h-[44px]"
           >
             View All Services
             <ArrowRight className="size-4" aria-hidden="true" />

@@ -12,7 +12,7 @@ const stats = [
 export function AboutPreview() {
   return (
     <section
-      className="py-20"
+      className="py-12 sm:py-16"
       style={{ background: 'linear-gradient(135deg, #ffffff 0%, #f8f5fc 100%)' }}
       aria-labelledby="about-heading"
     >
@@ -69,7 +69,7 @@ export function AboutPreview() {
             </div>
 
             <Button
-              className="bg-[#620E87] hover:bg-[#7d1aab] text-white border-0 rounded-xl px-6 h-11 font-semibold"
+              className="bg-[#620E87] hover:bg-[#4e0b6b] active:bg-[#3a0850] text-white border-0 rounded-xl px-6 h-11 font-semibold"
               asChild
             >
               <Link href="/about" aria-label="Learn more about Care In Our Hand">

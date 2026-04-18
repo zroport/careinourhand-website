@@ -39,13 +39,13 @@ function StarRating({ count }: { count: number }) {
 export function Testimonials() {
   return (
     <section
-      className="py-20 section-blob-purple"
+      className="py-12 sm:py-16 section-blob-purple"
       style={{ background: 'linear-gradient(135deg, #f5f0f9 0%, #fefefe 60%, #f5f0f9 100%)' }}
       aria-labelledby="testimonials-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <h2
             id="testimonials-heading"
             className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3"

@@ -31,7 +31,7 @@ const benefits = [
 export function CareersBenefits() {
   return (
     <section
-      className="py-16 sm:py-20 section-blob-both"
+      className="py-12 sm:py-16 section-blob-both"
       style={{ background: 'linear-gradient(135deg, #faf5ff 0%, #ffffff 50%, #f5faf0 100%)' }}
       aria-labelledby="benefits-heading"
     >

@@ -18,7 +18,7 @@ export function CareersListings({ onApply }: CareersListingsProps) {
 
   return (
     <section
-      className="py-16 sm:py-20 section-blob-purple"
+      className="py-12 sm:py-16 section-blob-purple"
       style={{ background: 'linear-gradient(135deg, #f5f0f9 0%, #f8f5fc 100%)' }}
       aria-labelledby="openings-heading"
     >

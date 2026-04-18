@@ -1,7 +1,7 @@
 export function OurStory() {
   return (
     <section
-      className="py-20 sm:py-24 section-blob-purple"
+      className="py-12 sm:py-16 section-blob-purple"
       style={{ backgroundColor: '#f8f5fc' }}
       aria-labelledby="our-story-heading"
     >

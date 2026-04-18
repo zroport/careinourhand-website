@@ -8,7 +8,7 @@ interface ServiceProvidesProps {
 export function ServiceProvides({ service }: ServiceProvidesProps) {
   return (
     <section
-      className="py-16 sm:py-20 section-blob-green"
+      className="py-12 sm:py-16 section-blob-green"
       style={{ backgroundColor: '#f5faf0' }}
       aria-labelledby="provides-heading"
     >

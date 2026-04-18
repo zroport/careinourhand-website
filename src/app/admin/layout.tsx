@@ -18,7 +18,7 @@ export default async function AdminLayout({
   }
 
   return (
-    <div className="flex h-screen overflow-hidden bg-gradient-to-br from-purple-50 via-white to-green-50">
+    <div className="flex h-screen overflow-hidden bg-[#F5F3F8]">
       <AdminSidebar
         userName={session.user.name}
         userEmail={session.user.email}

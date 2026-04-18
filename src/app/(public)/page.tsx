@@ -3,7 +3,7 @@
 export const dynamic = "force-dynamic";
 
 import type { Metadata } from "next";
-import { Hero } from "@/components/home/hero";
+import { HeroSlider } from "@/components/home/hero-slider";
 import { TrustBar } from "@/components/home/trust-bar";
 import { AboutPreview } from "@/components/home/about-preview";
 import { ServicesGrid } from "@/components/home/services-grid";
@@ -25,10 +25,26 @@ export const metadata: Metadata = {
   ],
 };
 
-export default function Home() {
+async function getHeroSlides() {
+  try {
+    const { prisma } = await import("@/lib/prisma");
+    // @ts-expect-error — run `npx prisma db push && npx prisma generate` to update client types
+    return await prisma.heroSlide.findMany({
+      where: { isActive: true },
+      orderBy: { order: "asc" },
+    });
+  } catch {
+    // Table may not exist yet — run `npx prisma db push` to create it.
+    return [];
+  }
+}
+
+export default async function Home() {
+  const slides = await getHeroSlides();
+
   return (
     <>
-      <Hero />
+      <HeroSlider slides={slides} />
       <TrustBar />
       <AboutPreview />
       <ServicesGrid />

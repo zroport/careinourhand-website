@@ -24,13 +24,13 @@ const values = [
 export function OurValues() {
   return (
     <section
-      className="py-20 sm:py-24 section-blob-green"
+      className="py-12 sm:py-16 section-blob-green"
       style={{ background: 'linear-gradient(135deg, #f0f9f0 0%, #fafcf8 100%)' }}
       aria-labelledby="our-values-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <span className="inline-block text-xs font-semibold tracking-widest text-[#89C541] uppercase mb-3">
             Our Values
           </span>

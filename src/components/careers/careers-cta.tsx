@@ -5,7 +5,7 @@ import { ArrowDown } from "lucide-react"
 
 export function CareersCta() {
   return (
-    <section className="py-16 sm:py-20 bg-gray-50" aria-labelledby="careers-cta-heading">
+    <section className="py-12 sm:py-16 bg-gray-50" aria-labelledby="careers-cta-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2
           id="careers-cta-heading"

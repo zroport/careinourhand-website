@@ -119,7 +119,7 @@ export function Header() {
               </Button>
               <Button
                 size="sm"
-                className="bg-[#89C541] hover:bg-[#6da033] text-gray-900 font-semibold border-0 transition-colors"
+                className="bg-[#89C541] hover:bg-[#6da033] text-white font-semibold border-0 transition-colors"
                 asChild
               >
                 <Link href="/referral" aria-label="Quick Referral — for support coordinators">
@@ -190,7 +190,7 @@ export function Header() {
                         <Link href="/booking">Book Now</Link>
                       </Button>
                       <Button
-                        className="w-full bg-[#89C541] hover:bg-[#6da033] text-gray-900 font-semibold border-0"
+                        className="w-full bg-[#89C541] hover:bg-[#6da033] text-white font-semibold border-0"
                         asChild
                         onClick={() => setMobileOpen(false)}
                       >
