@@ -6,6 +6,7 @@ import type { Metadata } from "next"
 import { prisma } from "@/lib/prisma"
 import { BlogHero } from "@/components/blog/blog-hero"
 import { BlogGrid } from "@/components/blog/blog-grid"
+import { getPageHeader } from "@/lib/page-header"
 
 export const metadata: Metadata = {
   title: "Blog | Care In Our Hand",
@@ -14,23 +15,26 @@ export const metadata: Metadata = {
 }
 
 export default async function BlogPage() {
-  const posts = await prisma.blogPost.findMany({
-    where: { isPublished: true },
-    orderBy: { publishedAt: "desc" },
-    select: {
-      id: true,
-      title: true,
-      slug: true,
-      excerpt: true,
-      coverImage: true,
-      author: true,
-      publishedAt: true,
-    },
-  })
+  const [posts, pageHeader] = await Promise.all([
+    prisma.blogPost.findMany({
+      where: { isPublished: true },
+      orderBy: { publishedAt: "desc" },
+      select: {
+        id: true,
+        title: true,
+        slug: true,
+        excerpt: true,
+        coverImage: true,
+        author: true,
+        publishedAt: true,
+      },
+    }),
+    getPageHeader("blog"),
+  ])
 
   return (
     <>
-      <BlogHero />
+      <BlogHero pageHeader={pageHeader} />
       <BlogGrid posts={posts} />
     </>
   )

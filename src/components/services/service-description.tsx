@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { MapPin, Tag, Users, ArrowRight } from "lucide-react";
+import { MapPin, Tag, Users, ArrowRight, FileDown } from "lucide-react";
 import type { Service } from "@/data/services";
 
 interface ServiceDescriptionProps {
@@ -28,6 +28,19 @@ export function ServiceDescription({ service }: ServiceDescriptionProps) {
               About This{" "}
               <span className="text-[#620E87]">Service</span>
             </h2>
+
+            {/* Service image */}
+            {service.image && (
+              <div className="mb-6 rounded-2xl overflow-hidden shadow-sm">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="w-full h-56 sm:h-64 object-cover"
+                />
+              </div>
+            )}
+
             <div className="space-y-5">
               {paragraphs.map((para, i) => (
                 <p
@@ -117,6 +130,25 @@ export function ServiceDescription({ service }: ServiceDescriptionProps) {
                     <ArrowRight className="size-4" aria-hidden="true" />
                   </Link>
                 </Button>
+
+                {/* Brochure download */}
+                {service.brochureUrl && (
+                  <Button
+                    className="w-full bg-[#89C541] hover:bg-[#6da033] text-white font-semibold rounded-xl h-11 text-sm transition-all"
+                    asChild
+                  >
+                    <a
+                      href={service.brochureUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Download service brochure PDF"
+                      className="flex items-center justify-center gap-2"
+                    >
+                      <FileDown className="size-4" aria-hidden="true" />
+                      Download Brochure
+                    </a>
+                  </Button>
+                )}
               </CardContent>
             </Card>
           </aside>

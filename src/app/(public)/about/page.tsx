@@ -9,6 +9,7 @@ import { OurValues } from "@/components/about/our-values";
 import { StatsBar } from "@/components/about/stats-bar";
 import { MeetTheTeam } from "@/components/about/meet-the-team";
 import { AboutCta } from "@/components/about/about-cta";
+import { getPageHeader } from "@/lib/page-header";
 
 export const metadata: Metadata = {
   title: "About Us | Care In Our Hand",
@@ -24,10 +25,11 @@ export const metadata: Metadata = {
   ],
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const pageHeader = await getPageHeader("about");
   return (
     <>
-      <PageHero />
+      <PageHero pageHeader={pageHeader} />
       <OurStory />
       <OurValues />
       <StatsBar />

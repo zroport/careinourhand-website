@@ -46,6 +46,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+async function getServiceMedia(slug: string) {
+  try {
+    const { prisma } = await import("@/lib/prisma");
+    return await prisma.service.findUnique({
+      where: { slug },
+      select: {
+        image: true,
+        brochureUrl: true,
+      },
+    });
+  } catch {
+    return null;
+  }
+}
+
 export default async function ServicePage({ params }: Props) {
   const { slug } = await params;
   const service = getServiceBySlug(slug);
@@ -55,14 +70,16 @@ export default async function ServicePage({ params }: Props) {
   }
 
   const relatedServices = getRelatedServices(slug);
+  const media = await getServiceMedia(slug);
+  const enrichedService = media ? { ...service, image: media.image, brochureUrl: (media as { brochureUrl?: string | null }).brochureUrl } : service;
 
   return (
     <>
-      <ServiceHero service={service} />
-      <ServiceDescription service={service} />
-      <ServiceProvides service={service} />
-      <ServiceWhoFor service={service} />
-      <ServiceCta service={service} />
+      <ServiceHero service={enrichedService} />
+      <ServiceDescription service={enrichedService} />
+      <ServiceProvides service={enrichedService} />
+      <ServiceWhoFor service={enrichedService} />
+      <ServiceCta service={enrichedService} />
       <ServiceRelated relatedServices={relatedServices} />
     </>
   );

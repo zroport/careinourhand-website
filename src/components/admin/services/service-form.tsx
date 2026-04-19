@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { FileUpload } from "@/components/ui/file-upload"
 import { updateService } from "@/actions/admin/update-service"
 
 function toSlug(value: string) {
@@ -32,6 +33,8 @@ const schema = z.object({
   icon: z.string().optional(),
   order: z.number().int().min(0),
   isActive: z.boolean(),
+  image: z.string().optional(),
+  brochureUrl: z.string().optional(),
 })
 
 type FormValues = z.infer<typeof schema>
@@ -57,6 +60,8 @@ export function ServiceForm({ serviceId, defaultValues }: ServiceFormProps) {
   })
 
   const titleValue = watch("title")
+  const imageValue = watch("image")
+  const brochureUrlValue = watch("brochureUrl")
 
   useEffect(() => {
     setValue("slug", toSlug(titleValue ?? ""), { shouldValidate: false })
@@ -127,6 +132,36 @@ export function ServiceForm({ serviceId, defaultValues }: ServiceFormProps) {
             <Label htmlFor="order">Display Order</Label>
             <Input id="order" type="number" min={0} {...register("order", { valueAsNumber: true })} className="w-32" />
             {errors.order && <p className="text-xs text-red-500">{errors.order.message}</p>}
+          </div>
+
+          <div className="space-y-1.5">
+            <FileUpload
+              key={`img-${defaultValues.image ?? "none"}`}
+              label="Service Photo"
+              accept="image/*"
+              maxSize={5}
+              currentUrl={imageValue || null}
+              onUpload={(url) => setValue("image", url, { shouldValidate: true })}
+              onRemove={() => setValue("image", "", { shouldValidate: false })}
+            />
+            <p className="text-xs text-gray-400">
+              Upload a photo that represents this service (e.g., a nurse helping a patient)
+            </p>
+          </div>
+
+          <div className="space-y-1.5">
+            <FileUpload
+              key={`pdf-${defaultValues.brochureUrl ?? "none"}`}
+              label="Service Brochure (PDF)"
+              accept="application/pdf"
+              maxSize={10}
+              currentUrl={brochureUrlValue || null}
+              onUpload={(url) => setValue("brochureUrl", url, { shouldValidate: true })}
+              onRemove={() => setValue("brochureUrl", "", { shouldValidate: false })}
+            />
+            <p className="text-xs text-gray-400">
+              Upload a downloadable PDF brochure for this service
+            </p>
           </div>
 
           <div className="flex items-center gap-3 pt-1">

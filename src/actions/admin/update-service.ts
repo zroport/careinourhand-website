@@ -17,6 +17,8 @@ const schema = z.object({
   icon: z.string().optional(),
   order: z.number().int().min(0),
   isActive: z.boolean(),
+  image: z.string().optional(),
+  brochureUrl: z.string().optional(),
 })
 
 export async function updateService(id: string, formData: unknown) {
@@ -45,6 +47,8 @@ export async function updateService(id: string, formData: unknown) {
       icon: data.icon || null,
       order: data.order,
       isActive: data.isActive,
+      image: data.image || null,
+      brochureUrl: data.brochureUrl || null,
     },
   })
 

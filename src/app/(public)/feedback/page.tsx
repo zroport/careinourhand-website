@@ -7,6 +7,7 @@ import { FeedbackHero } from "@/components/feedback/feedback-hero"
 import { FeedbackProcess } from "@/components/feedback/feedback-process"
 import { FeedbackForm } from "@/components/feedback/feedback-form"
 import { FeedbackOtherWays } from "@/components/feedback/feedback-other-ways"
+import { getPageHeader } from "@/lib/page-header"
 
 export const metadata: Metadata = {
   title: "Feedback & Complaints | Care In Our Hand",
@@ -14,10 +15,11 @@ export const metadata: Metadata = {
     "Share your compliments, suggestions, or complaints with Care In Our Hand. All feedback is treated with respect and confidentiality in line with NDIS Quality and Safeguards requirements.",
 }
 
-export default function FeedbackPage() {
+export default async function FeedbackPage() {
+  const pageHeader = await getPageHeader("feedback");
   return (
     <>
-      <FeedbackHero />
+      <FeedbackHero pageHeader={pageHeader} />
       <FeedbackProcess />
       <section
         className="py-12 section-blob-green"

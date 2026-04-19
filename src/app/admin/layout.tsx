@@ -1,8 +1,8 @@
-export const dynamic = "force-dynamic"
-
 import { auth } from "@/lib/auth"
 import { AdminSidebar } from "@/components/admin/sidebar"
 import { AdminTopBar } from "@/components/admin/topbar"
+
+export const dynamic = "force-dynamic"
 
 export default async function AdminLayout({
   children,

@@ -78,6 +78,7 @@ model Service {
   description String
   icon        String?
   image       String?
+  brochureUrl String?
   order       Int      @default(0)
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
@@ -287,6 +288,21 @@ model HeroSlide {
   buttonLink String?
   order      Int      @default(0)
   isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+// ============================================
+// PAGE HEADERS (Admin-editable hero sections)
+// Run `npx prisma db push` after adding this model to apply it to the database.
+// ============================================
+
+model PageHeader {
+  id         String   @id @default(cuid())
+  pageSlug   String   @unique
+  heading    String
+  subheading String?
+  imageUrl   String?
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }

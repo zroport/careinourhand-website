@@ -28,7 +28,6 @@ export const metadata: Metadata = {
 async function getHeroSlides() {
   try {
     const { prisma } = await import("@/lib/prisma");
-    // @ts-expect-error — run `npx prisma db push && npx prisma generate` to update client types
     return await prisma.heroSlide.findMany({
       where: { isActive: true },
       orderBy: { order: "asc" },

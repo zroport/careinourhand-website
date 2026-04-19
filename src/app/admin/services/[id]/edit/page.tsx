@@ -30,6 +30,8 @@ export default async function EditServicePage({ params }: { params: Promise<{ id
           icon: service.icon ?? "",
           order: service.order,
           isActive: service.isActive,
+          image: service.image ?? "",
+          brochureUrl: (service as { brochureUrl?: string | null }).brochureUrl ?? "",
         }}
       />
     </div>

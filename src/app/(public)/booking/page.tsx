@@ -5,6 +5,7 @@ export const dynamic = "force-dynamic";
 import type { Metadata } from "next"
 import { BookingPageHero } from "@/components/booking/page-hero"
 import { BookingForm } from "@/components/booking/booking-form"
+import { getPageHeader } from "@/lib/page-header"
 
 export const metadata: Metadata = {
   title: "Book an Appointment | Care In Our Hand",
@@ -18,10 +19,11 @@ export const metadata: Metadata = {
   ],
 }
 
-export default function BookingPage() {
+export default async function BookingPage() {
+  const pageHeader = await getPageHeader("booking");
   return (
     <>
-      <BookingPageHero />
+      <BookingPageHero pageHeader={pageHeader} />
       <section className="py-12 sm:py-16 bg-gray-50/50" aria-label="Booking form">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <BookingForm />

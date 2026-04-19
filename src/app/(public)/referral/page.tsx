@@ -5,6 +5,7 @@ export const dynamic = "force-dynamic";
 import type { Metadata } from "next"
 import { ReferralPageHero } from "@/components/referral/page-hero"
 import { ReferralForm } from "@/components/referral/referral-form"
+import { getPageHeader } from "@/lib/page-header"
 
 export const metadata: Metadata = {
   title: "Submit a Referral | Care In Our Hand",
@@ -18,10 +19,11 @@ export const metadata: Metadata = {
   ],
 }
 
-export default function ReferralPage() {
+export default async function ReferralPage() {
+  const pageHeader = await getPageHeader("referral");
   return (
     <>
-      <ReferralPageHero />
+      <ReferralPageHero pageHeader={pageHeader} />
       <section className="py-12 sm:py-16 bg-gray-50/50" aria-label="Referral form">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <ReferralForm />

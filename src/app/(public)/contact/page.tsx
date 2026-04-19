@@ -6,6 +6,7 @@ import type { Metadata } from "next"
 import { ContactPageHero } from "@/components/contact/page-hero"
 import { ContactForm } from "@/components/contact/contact-form"
 import { ContactInfo } from "@/components/contact/contact-info"
+import { getPageHeader } from "@/lib/page-header"
 
 export const metadata: Metadata = {
   title: "Contact Us | Care In Our Hand",
@@ -19,10 +20,11 @@ export const metadata: Metadata = {
   ],
 }
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const pageHeader = await getPageHeader("contact");
   return (
     <>
-      <ContactPageHero />
+      <ContactPageHero pageHeader={pageHeader} />
       <section
         className="py-12 sm:py-16 section-blob-both"
         style={{ background: 'linear-gradient(135deg, #f8f5fc 0%, #ffffff 50%, #f5faf0 100%)' }}

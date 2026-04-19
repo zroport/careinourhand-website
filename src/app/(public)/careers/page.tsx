@@ -7,6 +7,7 @@ import { prisma } from "@/lib/prisma"
 import { CareersHero } from "@/components/careers/careers-hero"
 import { CareersBenefits } from "@/components/careers/careers-benefits"
 import { CareersContainer } from "@/components/careers/careers-container"
+import { getPageHeader } from "@/lib/page-header"
 
 export const metadata: Metadata = {
   title: "Careers | Care In Our Hand",
@@ -15,22 +16,25 @@ export const metadata: Metadata = {
 }
 
 export default async function CareersPage() {
-  const activeJobs = await prisma.jobListing.findMany({
-    where: { isActive: true },
-    orderBy: { createdAt: "asc" },
-    select: {
-      id: true,
-      title: true,
-      location: true,
-      type: true,
-      description: true,
-      requirements: true,
-    },
-  })
+  const [activeJobs, pageHeader] = await Promise.all([
+    prisma.jobListing.findMany({
+      where: { isActive: true },
+      orderBy: { createdAt: "asc" },
+      select: {
+        id: true,
+        title: true,
+        location: true,
+        type: true,
+        description: true,
+        requirements: true,
+      },
+    }),
+    getPageHeader("careers"),
+  ])
 
   return (
     <>
-      <CareersHero />
+      <CareersHero pageHeader={pageHeader} />
       <CareersBenefits />
       <CareersContainer jobs={activeJobs} />
     </>

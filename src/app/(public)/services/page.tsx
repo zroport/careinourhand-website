@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { ServicesHero } from "@/components/services/services-hero";
 import { ServicesListingGrid } from "@/components/services/services-listing-grid";
 import { ServicesCta } from "@/components/services/services-cta";
+import { getPageHeader } from "@/lib/page-header";
 
 export const metadata: Metadata = {
   title: "NDIS Services | Care In Our Hand",
@@ -22,10 +23,11 @@ export const metadata: Metadata = {
   ],
 };
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const pageHeader = await getPageHeader("services");
   return (
     <>
-      <ServicesHero />
+      <ServicesHero pageHeader={pageHeader} />
       <ServicesListingGrid />
       <ServicesCta />
     </>

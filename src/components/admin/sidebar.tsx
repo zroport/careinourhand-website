@@ -17,6 +17,8 @@ import {
   Menu,
   X,
   ClipboardList,
+  Image,
+  Layout,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { SignOutButton } from "@/components/admin/sign-out-button"
@@ -56,6 +58,8 @@ const navSections: NavSection[] = [
       { label: "Services", href: "/admin/services", icon: LayoutGrid },
       { label: "FAQs", href: "/admin/faqs", icon: HelpCircle },
       { label: "Job Listings", href: "/admin/jobs", icon: ClipboardList },
+      { label: "Home Slider", href: "/admin/slides", icon: Image },
+      { label: "Page Headers", href: "/admin/page-headers", icon: Layout },
     ],
   },
   {
@@ -96,10 +100,13 @@ function NavLink({ item }: { item: NavItem }) {
   )
 }
 
-export function AdminSidebar({ userName, userEmail }: SidebarProps) {
-  const [mobileOpen, setMobileOpen] = useState(false)
+interface SidebarContentProps {
+  userName?: string | null
+  userEmail?: string | null
+}
 
-  const SidebarContent = () => (
+function SidebarContent({ userName, userEmail }: SidebarContentProps) {
+  return (
     <div className="flex flex-col h-full">
       {/* Logo */}
       <div className="px-5 py-5 border-b border-white/40">
@@ -150,6 +157,10 @@ export function AdminSidebar({ userName, userEmail }: SidebarProps) {
       </div>
     </div>
   )
+}
+
+export function AdminSidebar({ userName, userEmail }: SidebarProps) {
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
     <>
@@ -186,7 +197,7 @@ export function AdminSidebar({ userName, userEmail }: SidebarProps) {
         >
           <X className="w-5 h-5 text-gray-600" aria-hidden="true" />
         </button>
-        <SidebarContent />
+        <SidebarContent userName={userName} userEmail={userEmail} />
       </aside>
 
       {/* Desktop sidebar */}
@@ -194,7 +205,7 @@ export function AdminSidebar({ userName, userEmail }: SidebarProps) {
         className="hidden lg:flex flex-col w-64 shrink-0 admin-sidebar-bg glass-card rounded-none border-r h-screen sticky top-0"
         aria-label="Admin sidebar"
       >
-        <SidebarContent />
+        <SidebarContent userName={userName} userEmail={userEmail} />
       </aside>
     </>
   )

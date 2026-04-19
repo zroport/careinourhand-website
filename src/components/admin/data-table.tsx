@@ -10,9 +10,9 @@ export function DataTable({ headers, children }: DataTableProps) {
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-white/40 bg-white/30">
-              {headers.map((header) => (
+              {headers.map((header, index) => (
                 <th
-                  key={header}
+                  key={index}
                   className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap"
                 >
                   {header}

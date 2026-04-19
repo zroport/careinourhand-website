@@ -22,6 +22,8 @@ export interface Service {
   whatWeProvide: string[];
   whoIsThisFor: string;
   ndisCategory: string;
+  image?: string | null;
+  brochureUrl?: string | null;
 }
 
 export const iconMap: Record<string, LucideIcon> = {
