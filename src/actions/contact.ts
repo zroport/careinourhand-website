@@ -2,6 +2,8 @@
 
 import { z } from "zod"
 import { prisma } from "@/lib/prisma"
+import { sendEmail, adminEmail } from "@/lib/email"
+import { newContactAdmin } from "@/lib/email-templates"
 
 const contactSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -33,6 +35,20 @@ export async function submitContact(data: ContactFormData): Promise<ContactActio
         subject: v.subject || null,
         message: v.message,
       },
+    })
+
+    const baseUrl = process.env.NEXTAUTH_URL ?? "http://localhost:3000"
+
+    await sendEmail({
+      to: adminEmail(),
+      ...newContactAdmin({
+        name: v.name,
+        email: v.email,
+        phone: v.phone,
+        subject: v.subject,
+        message: v.message,
+        adminUrl: `${baseUrl}/admin/messages`,
+      }),
     })
 
     return { success: true }

@@ -1,26 +1,45 @@
 import { Star, Quote } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { prisma } from "@/lib/prisma";
 
-const testimonials = [
+const fallbackTestimonials = [
   {
+    id: "1",
     name: "Sarah M.",
     role: "Participant",
-    body: "Care In Our Hand has completely changed my life. The support workers genuinely care and always respect my choices. I finally feel like I'm in control of my own life.",
-    stars: 5,
+    content:
+      "Care In Our Hand has completely changed my life. The support workers genuinely care and always respect my choices. I finally feel like I'm in control of my own life.",
+    rating: 5,
   },
   {
+    id: "2",
     name: "James T.",
     role: "Parent & Guardian",
-    body: "Finding culturally appropriate care for my son was so difficult until we found Care In Our Hand. They truly understand our family's needs and never make us feel like a burden.",
-    stars: 5,
+    content:
+      "Finding culturally appropriate care for my son was so difficult until we found Care In Our Hand. They truly understand our family's needs and never make us feel like a burden.",
+    rating: 5,
   },
   {
+    id: "3",
     name: "Lisa R.",
     role: "Support Coordinator",
-    body: "The referral process is so smooth and the team always has capacity. They're my go-to provider in South-West Sydney — professional, responsive, and truly person-centred.",
-    stars: 5,
+    content:
+      "The referral process is so smooth and the team always has capacity. They're my go-to provider in South-West Sydney — professional, responsive, and truly person-centred.",
+    rating: 5,
   },
 ];
+
+async function getTestimonials() {
+  try {
+    const rows = await prisma.testimonial.findMany({
+      where: { isActive: true },
+      orderBy: { order: "asc" },
+    });
+    return rows.length > 0 ? rows : fallbackTestimonials;
+  } catch {
+    return fallbackTestimonials;
+  }
+}
 
 function StarRating({ count }: { count: number }) {
   return (
@@ -36,15 +55,16 @@ function StarRating({ count }: { count: number }) {
   );
 }
 
-export function Testimonials() {
+export async function Testimonials() {
+  const testimonials = await getTestimonials();
+
   return (
     <section
       className="py-12 sm:py-16 section-blob-purple"
-      style={{ background: 'linear-gradient(135deg, #f5f0f9 0%, #fefefe 60%, #f5f0f9 100%)' }}
+      style={{ background: "linear-gradient(135deg, #f5f0f9 0%, #fefefe 60%, #f5f0f9 100%)" }}
       aria-labelledby="testimonials-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
         <div className="text-center mb-8">
           <h2
             id="testimonials-heading"
@@ -59,14 +79,12 @@ export function Testimonials() {
           </p>
         </div>
 
-        {/* Testimonial cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {testimonials.map((t) => (
             <Card
-              key={t.name}
+              key={t.id}
               className="relative shadow-sm hover:shadow-md transition-shadow duration-200 overflow-visible glass-card"
             >
-              {/* Large decorative quote mark */}
               <div
                 aria-hidden="true"
                 className="absolute -top-3 -left-2 flex items-center justify-center size-10 rounded-full bg-[#620E87] shadow-md"
@@ -75,15 +93,12 @@ export function Testimonials() {
               </div>
 
               <CardContent className="pt-8 pb-6 px-6 flex flex-col gap-4 h-full">
-                {/* Stars */}
-                <StarRating count={t.stars} />
+                <StarRating count={t.rating} />
 
-                {/* Body */}
                 <p className="text-gray-600 text-sm leading-relaxed flex-1 italic">
-                  &ldquo;{t.body}&rdquo;
+                  &ldquo;{t.content}&rdquo;
                 </p>
 
-                {/* Author */}
                 <div className="flex items-center gap-3 pt-2 border-t border-gray-100">
                   <div
                     className="flex items-center justify-center size-9 rounded-full bg-[#620E87]/10 font-bold text-[#620E87] text-sm shrink-0"
@@ -92,10 +107,8 @@ export function Testimonials() {
                     {t.name.charAt(0)}
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-gray-900">
-                      {t.name}
-                    </p>
-                    <p className="text-xs text-gray-400">{t.role}</p>
+                    <p className="text-sm font-semibold text-gray-900">{t.name}</p>
+                    {t.role && <p className="text-xs text-gray-400">{t.role}</p>}
                   </div>
                 </div>
               </CardContent>

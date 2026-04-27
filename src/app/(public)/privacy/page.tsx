@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 import type { Metadata } from "next"
 import Link from "next/link"
 import { LegalHero } from "@/components/legal/legal-hero"
-import { AlertCircle } from "lucide-react"
+import { getSiteSettings, setting } from "@/lib/site-settings"
 
 export const metadata: Metadata = {
   title: "Privacy Policy | Care In Our Hand",
@@ -74,7 +74,13 @@ const sections = [
     content:
       "We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated revision date. We encourage you to review this policy periodically.",
   },
-  {
+]
+
+export default async function PrivacyPage() {
+  const s = await getSiteSettings()
+  const phone = setting(s, "phone", "1300 XXX XXX")
+
+  const contactSection = {
     id: "contact",
     heading: "Contact Us",
     content: null,
@@ -96,7 +102,7 @@ const sections = [
           privacy@careinourhand.com.au
         </a>
         <br />
-        Phone: 1300 XXX XXX
+        Phone: {phone}
         <br />
         <br />
         You may also contact the Office of the Australian Information Commissioner (OAIC) at{" "}
@@ -111,10 +117,8 @@ const sections = [
         if you believe we have breached your privacy.
       </>
     ),
-  },
-]
-
-export default function PrivacyPage() {
+  }
+  const allSections = [...sections, contactSection]
   return (
     <>
       <LegalHero
@@ -125,25 +129,9 @@ export default function PrivacyPage() {
 
       <div className="bg-white py-12 sm:py-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Draft callout */}
-          <div
-            className="flex gap-3 rounded-xl border border-amber-200 bg-amber-50 p-4 sm:p-5 mb-10"
-            role="note"
-            aria-label="Draft notice"
-          >
-            <AlertCircle
-              className="size-5 text-amber-600 shrink-0 mt-0.5"
-              aria-hidden="true"
-            />
-            <p className="text-sm text-amber-800 leading-relaxed">
-              This Privacy Policy is a draft template. Care In Our Hand will update this with
-              finalised legal terms reviewed by a qualified legal professional.
-            </p>
-          </div>
-
           {/* Sections */}
           <div className="space-y-10">
-            {sections.map((section) => (
+            {allSections.map((section) => (
               <section key={section.id} aria-labelledby={`privacy-${section.id}`}>
                 <h2
                   id={`privacy-${section.id}`}

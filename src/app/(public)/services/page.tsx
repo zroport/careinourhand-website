@@ -7,6 +7,7 @@ import { ServicesHero } from "@/components/services/services-hero";
 import { ServicesListingGrid } from "@/components/services/services-listing-grid";
 import { ServicesCta } from "@/components/services/services-cta";
 import { getPageHeader } from "@/lib/page-header";
+import { getPageContent } from "@/lib/page-content";
 
 export const metadata: Metadata = {
   title: "NDIS Services | Care In Our Hand",
@@ -24,12 +25,15 @@ export const metadata: Metadata = {
 };
 
 export default async function ServicesPage() {
-  const pageHeader = await getPageHeader("services");
+  const [pageHeader, content] = await Promise.all([
+    getPageHeader("services"),
+    getPageContent("services"),
+  ]);
   return (
     <>
       <ServicesHero pageHeader={pageHeader} />
       <ServicesListingGrid />
-      <ServicesCta />
+      <ServicesCta heading={content.cta?.heading} body={content.cta?.body} />
     </>
   );
 }

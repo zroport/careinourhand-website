@@ -30,7 +30,15 @@ const navLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
-export function Header() {
+interface HeaderProps {
+  phone?: string
+  email?: string
+}
+
+export function Header({
+  phone = "1300 XXX XXX",
+  email = "info@careinourhand.com.au",
+}: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
 
@@ -45,20 +53,20 @@ export function Header() {
       <div className="bg-[#620E87] text-white text-xs py-2 px-4">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-x-6 gap-y-1 sm:justify-end">
           <a
-            href="tel:1300XXXXXX"
+            href={`tel:${phone.replace(/\s/g, "")}`}
             className="flex items-center gap-1.5 hover:text-[#89C541] transition-colors"
-            aria-label="Call us on 1300 XXX XXX"
+            aria-label={`Call us on ${phone}`}
           >
             <Phone className="size-3" aria-hidden="true" />
-            <span>1300 XXX XXX</span>
+            <span>{phone}</span>
           </a>
           <a
-            href="mailto:info@careinourhand.com.au"
+            href={`mailto:${email}`}
             className="flex items-center gap-1.5 hover:text-[#89C541] transition-colors"
-            aria-label="Email us at info@careinourhand.com.au"
+            aria-label={`Email us at ${email}`}
           >
             <Mail className="size-3" aria-hidden="true" />
-            <span>info@careinourhand.com.au</span>
+            <span>{email}</span>
           </a>
           <span className="flex items-center gap-1.5">
             <MapPin className="size-3" aria-hidden="true" />
@@ -200,20 +208,20 @@ export function Header() {
 
                     <div className="mt-4 pt-4 border-t border-gray-100 space-y-2 text-xs text-gray-500">
                       <a
-                        href="tel:1300XXXXXX"
+                        href={`tel:${phone.replace(/\s/g, "")}`}
                         className="flex items-center gap-2 hover:text-[#620E87] transition-colors"
-                        aria-label="Call 1300 XXX XXX"
+                        aria-label={`Call ${phone}`}
                       >
                         <Phone className="size-3.5" aria-hidden="true" />
-                        1300 XXX XXX
+                        {phone}
                       </a>
                       <a
-                        href="mailto:info@careinourhand.com.au"
+                        href={`mailto:${email}`}
                         className="flex items-center gap-2 hover:text-[#620E87] transition-colors"
-                        aria-label="Email info@careinourhand.com.au"
+                        aria-label={`Email ${email}`}
                       >
                         <Mail className="size-3.5" aria-hidden="true" />
-                        info@careinourhand.com.au
+                        {email}
                       </a>
                     </div>
                   </nav>

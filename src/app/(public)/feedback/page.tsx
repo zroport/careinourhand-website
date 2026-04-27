@@ -8,6 +8,7 @@ import { FeedbackProcess } from "@/components/feedback/feedback-process"
 import { FeedbackForm } from "@/components/feedback/feedback-form"
 import { FeedbackOtherWays } from "@/components/feedback/feedback-other-ways"
 import { getPageHeader } from "@/lib/page-header"
+import { getSiteSettings, setting } from "@/lib/site-settings"
 
 export const metadata: Metadata = {
   title: "Feedback & Complaints | Care In Our Hand",
@@ -16,7 +17,11 @@ export const metadata: Metadata = {
 }
 
 export default async function FeedbackPage() {
-  const pageHeader = await getPageHeader("feedback");
+  const [pageHeader, s] = await Promise.all([
+    getPageHeader("feedback"),
+    getSiteSettings(),
+  ]);
+  const phone = setting(s, "phone", "1300 XXX XXX");
   return (
     <>
       <FeedbackHero pageHeader={pageHeader} />
@@ -29,7 +34,7 @@ export default async function FeedbackPage() {
           <FeedbackForm />
         </div>
       </section>
-      <FeedbackOtherWays />
+      <FeedbackOtherWays phone={phone} />
     </>
   )
 }

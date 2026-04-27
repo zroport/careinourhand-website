@@ -1,4 +1,26 @@
-export function OurStory() {
+interface OurStoryProps {
+  heading?: string
+  para1?: string
+  para2?: string
+  para3?: string
+}
+
+const DEFAULTS = {
+  heading: "Built on Understanding",
+  para1:
+    "Care In Our Hand was founded in Sydney after seeing firsthand how many families struggled to find disability support that was culturally appropriate, flexible, and genuinely personal. Too often, participants were treated as numbers in a system rather than individuals with unique goals, backgrounds, and dreams.",
+  para2:
+    "Our founders brought together years of healthcare experience across the NSW health sector with a deep commitment to doing things differently. We believe that great care starts with understanding — understanding your culture, your language, your family dynamics, and most importantly, your choices.",
+  para3:
+    "Today, we're proud to serve the South-West Sydney community from our base in Leppington, providing NDIS support services that put you in the driver's seat of your own life.",
+}
+
+export function OurStory({
+  heading = DEFAULTS.heading,
+  para1 = DEFAULTS.para1,
+  para2 = DEFAULTS.para2,
+  para3 = DEFAULTS.para3,
+}: OurStoryProps) {
   return (
     <section
       className="py-12 sm:py-16 section-blob-purple"
@@ -16,31 +38,13 @@ export function OurStory() {
               id="our-story-heading"
               className="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight mb-6"
             >
-              Built on{" "}
-              <span className="text-[#620E87]">Understanding</span>
+              {heading}
             </h2>
 
             <div className="space-y-5 text-gray-600 text-base leading-relaxed">
-              <p>
-                Care In Our Hand was founded in Sydney after seeing firsthand
-                how many families struggled to find disability support that was
-                culturally appropriate, flexible, and genuinely personal. Too
-                often, participants were treated as numbers in a system rather
-                than individuals with unique goals, backgrounds, and dreams.
-              </p>
-              <p>
-                Our founders brought together years of healthcare experience
-                across the NSW health sector with a deep commitment to doing
-                things differently. We believe that great care starts with
-                understanding — understanding your culture, your language, your
-                family dynamics, and most importantly, your choices.
-              </p>
-              <p>
-                Today, we&apos;re proud to serve the South-West Sydney
-                community from our base in Leppington, providing NDIS support
-                services that put you in the driver&apos;s seat of your own
-                life.
-              </p>
+              <p>{para1}</p>
+              <p>{para2}</p>
+              <p>{para3}</p>
             </div>
           </div>
 

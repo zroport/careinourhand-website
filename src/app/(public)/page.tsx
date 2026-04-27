@@ -10,6 +10,7 @@ import { ServicesGrid } from "@/components/home/services-grid";
 import { WhyChooseUs } from "@/components/home/why-choose-us";
 import { Testimonials } from "@/components/home/testimonials";
 import { CtaBanner } from "@/components/home/cta-banner";
+import { getPageContent } from "@/lib/page-content";
 
 export const metadata: Metadata = {
   title: "Care In Our Hand | NDIS Provider Sydney",
@@ -39,7 +40,10 @@ async function getHeroSlides() {
 }
 
 export default async function Home() {
-  const slides = await getHeroSlides();
+  const [slides, content] = await Promise.all([
+    getHeroSlides(),
+    getPageContent("home"),
+  ]);
 
   return (
     <>
@@ -49,7 +53,7 @@ export default async function Home() {
       <ServicesGrid />
       <WhyChooseUs />
       <Testimonials />
-      <CtaBanner />
+      <CtaBanner heading={content.cta?.heading} body={content.cta?.body} />
     </>
   );
 }

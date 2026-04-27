@@ -2,6 +2,8 @@
 
 import { z } from "zod"
 import { prisma } from "@/lib/prisma"
+import { sendEmail, adminEmail } from "@/lib/email"
+import { newFeedbackAdmin } from "@/lib/email-templates"
 type FeedbackType = "COMPLIMENT" | "SUGGESTION" | "COMPLAINT"
 
 const feedbackSchema = z.object({
@@ -46,6 +48,20 @@ export async function submitFeedback(data: FeedbackFormData): Promise<FeedbackAc
         email: v.isAnonymous ? null : (v.email?.trim() || null),
         phone: v.isAnonymous ? null : (v.phone?.trim() || null),
       },
+    })
+
+    const baseUrl = process.env.NEXTAUTH_URL ?? "http://localhost:3000"
+
+    await sendEmail({
+      to: adminEmail(),
+      ...newFeedbackAdmin({
+        type: v.type,
+        name: v.isAnonymous ? null : v.name,
+        email: v.isAnonymous ? null : v.email,
+        message: v.message,
+        isAnonymous: v.isAnonymous,
+        adminUrl: `${baseUrl}/admin/feedback`,
+      }),
     })
 
     return { success: true }

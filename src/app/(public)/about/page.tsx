@@ -10,6 +10,7 @@ import { StatsBar } from "@/components/about/stats-bar";
 import { MeetTheTeam } from "@/components/about/meet-the-team";
 import { AboutCta } from "@/components/about/about-cta";
 import { getPageHeader } from "@/lib/page-header";
+import { getPageContent } from "@/lib/page-content";
 
 export const metadata: Metadata = {
   title: "About Us | Care In Our Hand",
@@ -26,15 +27,23 @@ export const metadata: Metadata = {
 };
 
 export default async function AboutPage() {
-  const pageHeader = await getPageHeader("about");
+  const [pageHeader, content] = await Promise.all([
+    getPageHeader("about"),
+    getPageContent("about"),
+  ]);
   return (
     <>
       <PageHero pageHeader={pageHeader} />
-      <OurStory />
+      <OurStory
+        heading={content.ourStory?.heading}
+        para1={content.ourStory?.para1}
+        para2={content.ourStory?.para2}
+        para3={content.ourStory?.para3}
+      />
       <OurValues />
       <StatsBar />
       <MeetTheTeam />
-      <AboutCta />
+      <AboutCta heading={content.cta?.heading} body={content.cta?.body} />
     </>
   );
 }

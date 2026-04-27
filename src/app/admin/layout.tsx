@@ -22,6 +22,7 @@ export default async function AdminLayout({
       <AdminSidebar
         userName={session.user.name}
         userEmail={session.user.email}
+        userRole={session.user.role as import("@prisma/client").UserRole}
       />
       <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
         <AdminTopBar userName={session.user.name} />

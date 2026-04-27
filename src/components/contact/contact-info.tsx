@@ -3,7 +3,23 @@ import { MapPin, Phone, Mail, Clock } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 
-export function ContactInfo() {
+interface ContactInfoProps {
+  address?: string
+  phone?: string
+  email?: string
+  hoursWeekday?: string
+  hoursSaturday?: string
+  hoursSunday?: string
+}
+
+export function ContactInfo({
+  address = "15 Gribbin Road\nLeppington NSW 2179",
+  phone = "1300 XXX XXX",
+  email = "info@careinourhand.com.au",
+  hoursWeekday = "Monday – Friday: 8:00 AM – 6:00 PM",
+  hoursSaturday = "Saturday: 9:00 AM – 2:00 PM",
+  hoursSunday = "Sunday: Closed",
+}: ContactInfoProps) {
   return (
     <div className="space-y-5">
       {/* Contact details */}
@@ -21,10 +37,8 @@ export function ContactInfo() {
             </span>
             <div>
               <p className="text-sm font-medium text-gray-900">Address</p>
-              <p className="text-sm text-muted-foreground mt-0.5">
-                15 Gribbin Road
-                <br />
-                Leppington NSW 2179
+              <p className="text-sm text-muted-foreground mt-0.5 whitespace-pre-line">
+                {address}
               </p>
             </div>
           </div>
@@ -39,11 +53,11 @@ export function ContactInfo() {
             <div>
               <p className="text-sm font-medium text-gray-900">Phone</p>
               <a
-                href="tel:1300XXXXXX"
+                href={`tel:${phone.replace(/\s/g, "")}`}
                 className="text-sm text-[#620E87] hover:underline mt-0.5 block"
-                aria-label="Call us on 1300 XXX XXX"
+                aria-label={`Call us on ${phone}`}
               >
-                1300 XXX XXX
+                {phone}
               </a>
             </div>
           </div>
@@ -58,10 +72,10 @@ export function ContactInfo() {
             <div>
               <p className="text-sm font-medium text-gray-900">Email</p>
               <a
-                href="mailto:info@careinourhand.com.au"
+                href={`mailto:${email}`}
                 className="text-sm text-[#620E87] hover:underline mt-0.5 block"
               >
-                info@careinourhand.com.au
+                {email}
               </a>
             </div>
           </div>
@@ -76,9 +90,9 @@ export function ContactInfo() {
             <div>
               <p className="text-sm font-medium text-gray-900">Office Hours</p>
               <div className="text-sm text-muted-foreground mt-0.5 space-y-0.5">
-                <p>Monday – Friday: 8:00 AM – 6:00 PM</p>
-                <p>Saturday: 9:00 AM – 2:00 PM</p>
-                <p>Sunday: Closed</p>
+                <p>{hoursWeekday}</p>
+                <p>{hoursSaturday}</p>
+                <p>{hoursSunday}</p>
               </div>
             </div>
           </div>

@@ -19,14 +19,21 @@ import {
   ClipboardList,
   Image,
   Layout,
+  Users,
+  PanelLeft,
+  Star,
+  FolderImage,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { SignOutButton } from "@/components/admin/sign-out-button"
+import { canAccess, type Module } from "@/lib/permissions"
+import type { UserRole } from "@prisma/client"
 
 interface NavItem {
   label: string
   href: string
   icon: React.ElementType
+  module: Module
 }
 
 interface NavSection {
@@ -38,34 +45,38 @@ const navSections: NavSection[] = [
   {
     heading: "OVERVIEW",
     items: [
-      { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
+      { label: "Dashboard", href: "/admin", icon: LayoutDashboard, module: "dashboard" },
     ],
   },
   {
     heading: "INBOX",
     items: [
-      { label: "Referrals", href: "/admin/referrals", icon: Inbox },
-      { label: "Bookings", href: "/admin/bookings", icon: Calendar },
-      { label: "Messages", href: "/admin/messages", icon: MessageSquare },
-      { label: "Feedback", href: "/admin/feedback", icon: MessageCircle },
-      { label: "Applications", href: "/admin/applications", icon: Briefcase },
+      { label: "Referrals", href: "/admin/referrals", icon: Inbox, module: "referrals" },
+      { label: "Bookings", href: "/admin/bookings", icon: Calendar, module: "bookings" },
+      { label: "Messages", href: "/admin/messages", icon: MessageSquare, module: "messages" },
+      { label: "Feedback", href: "/admin/feedback", icon: MessageCircle, module: "feedback" },
+      { label: "Applications", href: "/admin/applications", icon: Briefcase, module: "applications" },
     ],
   },
   {
     heading: "CONTENT",
     items: [
-      { label: "Blog Posts", href: "/admin/blog", icon: FileText },
-      { label: "Services", href: "/admin/services", icon: LayoutGrid },
-      { label: "FAQs", href: "/admin/faqs", icon: HelpCircle },
-      { label: "Job Listings", href: "/admin/jobs", icon: ClipboardList },
-      { label: "Home Slider", href: "/admin/slides", icon: Image },
-      { label: "Page Headers", href: "/admin/page-headers", icon: Layout },
+      { label: "Blog Posts", href: "/admin/blog", icon: FileText, module: "blog" },
+      { label: "Services", href: "/admin/services", icon: LayoutGrid, module: "services" },
+      { label: "FAQs", href: "/admin/faqs", icon: HelpCircle, module: "faqs" },
+      { label: "Job Listings", href: "/admin/jobs", icon: ClipboardList, module: "jobs" },
+      { label: "Home Slider", href: "/admin/slides", icon: Image, module: "slides" },
+      { label: "Page Headers", href: "/admin/page-headers", icon: Layout, module: "page-headers" },
+      { label: "Page Manager", href: "/admin/pages", icon: PanelLeft, module: "page-manager" },
+      { label: "Testimonials", href: "/admin/testimonials", icon: Star, module: "testimonials" },
+      { label: "Media Library", href: "/admin/media", icon: FolderImage, module: "media" },
     ],
   },
   {
     heading: "SETTINGS",
     items: [
-      { label: "Site Settings", href: "/admin/settings", icon: Settings },
+      { label: "Site Settings", href: "/admin/settings", icon: Settings, module: "settings" },
+      { label: "User Management", href: "/admin/users", icon: Users, module: "users" },
     ],
   },
 ]
@@ -73,6 +84,7 @@ const navSections: NavSection[] = [
 interface SidebarProps {
   userName?: string | null
   userEmail?: string | null
+  userRole?: UserRole | null
 }
 
 function NavLink({ item }: { item: NavItem }) {
@@ -103,9 +115,19 @@ function NavLink({ item }: { item: NavItem }) {
 interface SidebarContentProps {
   userName?: string | null
   userEmail?: string | null
+  userRole?: UserRole | null
 }
 
-function SidebarContent({ userName, userEmail }: SidebarContentProps) {
+function SidebarContent({ userName, userEmail, userRole }: SidebarContentProps) {
+  const filteredSections = navSections
+    .map((section) => ({
+      ...section,
+      items: section.items.filter(
+        (item) => !userRole || canAccess(userRole, item.module)
+      ),
+    }))
+    .filter((section) => section.items.length > 0)
+
   return (
     <div className="flex flex-col h-full">
       {/* Logo */}
@@ -118,7 +140,7 @@ function SidebarContent({ userName, userEmail }: SidebarContentProps) {
 
       {/* Nav */}
       <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-5" aria-label="Admin navigation">
-        {navSections.map((section) => (
+        {filteredSections.map((section) => (
           <div key={section.heading}>
             <p className="px-3 mb-1.5 text-[10px] font-semibold tracking-widest text-gray-400 uppercase">
               {section.heading}
@@ -159,7 +181,7 @@ function SidebarContent({ userName, userEmail }: SidebarContentProps) {
   )
 }
 
-export function AdminSidebar({ userName, userEmail }: SidebarProps) {
+export function AdminSidebar({ userName, userEmail, userRole }: SidebarProps) {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
@@ -197,7 +219,7 @@ export function AdminSidebar({ userName, userEmail }: SidebarProps) {
         >
           <X className="w-5 h-5 text-gray-600" aria-hidden="true" />
         </button>
-        <SidebarContent userName={userName} userEmail={userEmail} />
+        <SidebarContent userName={userName} userEmail={userEmail} userRole={userRole} />
       </aside>
 
       {/* Desktop sidebar */}
@@ -205,7 +227,7 @@ export function AdminSidebar({ userName, userEmail }: SidebarProps) {
         className="hidden lg:flex flex-col w-64 shrink-0 admin-sidebar-bg glass-card rounded-none border-r h-screen sticky top-0"
         aria-label="Admin sidebar"
       >
-        <SidebarContent userName={userName} userEmail={userEmail} />
+        <SidebarContent userName={userName} userEmail={userEmail} userRole={userRole} />
       </aside>
     </>
   )

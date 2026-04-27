@@ -2,7 +2,15 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Phone } from "lucide-react";
 
-export function CtaBanner() {
+interface CtaBannerProps {
+  heading?: string
+  body?: string
+}
+
+export function CtaBanner({
+  heading = "Ready to Get Started?",
+  body = "Whether you're a participant, family member, or support coordinator, we'd love to hear from you. Let's build your support plan together.",
+}: CtaBannerProps) {
   return (
     <section
       className="relative overflow-hidden bg-[#89C541] py-16 sm:py-20"
@@ -29,14 +37,12 @@ export function CtaBanner() {
           id="cta-heading"
           className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 leading-tight"
         >
-          Ready to Get Started?
+          {heading}
         </h2>
 
         {/* Subtext */}
         <p className="text-gray-800 text-base sm:text-lg leading-relaxed mb-8 max-w-xl mx-auto">
-          Whether you&apos;re a participant, family member, or support
-          coordinator, we&apos;d love to hear from you. Let&apos;s build your
-          support plan together.
+          {body}
         </p>
 
         {/* Buttons */}

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { writeFile, mkdir } from "fs/promises"
 import { join, extname } from "path"
+import { prisma } from "@/lib/prisma"
 
 const IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/gif", "image/jpg"])
 const PDF_TYPES = new Set(["application/pdf"])
@@ -44,7 +45,21 @@ export async function POST(request: NextRequest) {
     const buffer = Buffer.from(bytes)
     await writeFile(join(uploadDir, unique), buffer)
 
-    return NextResponse.json({ url: `/uploads/${unique}`, success: true })
+    const fileUrl = `/uploads/${unique}`
+    try {
+      await prisma.media.create({
+        data: {
+          fileName: file.name,
+          fileUrl,
+          fileType: file.type,
+          fileSize: file.size,
+        },
+      })
+    } catch {
+      // non-fatal — file is saved even if DB insert fails
+    }
+
+    return NextResponse.json({ url: fileUrl, success: true })
   } catch (err) {
     console.error("Upload error:", err)
     return NextResponse.json({ error: "Upload failed", success: false }, { status: 500 })

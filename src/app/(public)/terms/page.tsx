@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 import type { Metadata } from "next"
 import Link from "next/link"
 import { LegalHero } from "@/components/legal/legal-hero"
-import { AlertCircle } from "lucide-react"
+import { getSiteSettings, setting } from "@/lib/site-settings"
 
 export const metadata: Metadata = {
   title: "Terms of Service | Care In Our Hand",
@@ -76,15 +76,20 @@ const sections = [
     content:
       "We reserve the right to update these Terms of Service at any time. Changes will be posted on this page with an updated revision date. Continued use of our website after changes constitutes acceptance of the revised terms.",
   },
-  {
-    id: "contact",
-    heading: "Contact",
-    content:
-      "If you have any questions about these Terms of Service, please contact us at info@careinourhand.com.au or call 1300 XXX XXX.",
-  },
 ]
 
-export default function TermsPage() {
+export default async function TermsPage() {
+  const s = await getSiteSettings()
+  const phone = setting(s, "phone", "1300 XXX XXX")
+  const email = setting(s, "email", "info@careinourhand.com.au")
+
+  const contactSection = {
+    id: "contact",
+    heading: "Contact",
+    content: `If you have any questions about these Terms of Service, please contact us at ${email} or call ${phone}.`,
+    customContent: null as React.ReactNode,
+  }
+  const allSections = [...sections, contactSection]
   return (
     <>
       <LegalHero
@@ -95,32 +100,9 @@ export default function TermsPage() {
 
       <div className="bg-white py-12 sm:py-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Draft callout */}
-          <div
-            className="flex gap-3 rounded-xl border border-amber-200 bg-amber-50 p-4 sm:p-5 mb-10"
-            role="note"
-            aria-label="Draft notice"
-          >
-            <AlertCircle
-              className="size-5 text-amber-600 shrink-0 mt-0.5"
-              aria-hidden="true"
-            />
-            <p className="text-sm text-amber-800 leading-relaxed">
-              These Terms of Service are a draft template. Care In Our Hand will update these with
-              finalised legal terms. Please{" "}
-              <Link
-                href="/contact"
-                className="font-semibold underline underline-offset-2 hover:text-amber-900 transition-colors"
-              >
-                contact us
-              </Link>{" "}
-              if you have any questions.
-            </p>
-          </div>
-
           {/* Sections */}
           <div className="space-y-10">
-            {sections.map((section) => (
+            {allSections.map((section) => (
               <section key={section.id} aria-labelledby={`terms-${section.id}`}>
                 <h2
                   id={`terms-${section.id}`}

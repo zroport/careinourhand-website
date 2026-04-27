@@ -2,7 +2,15 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { MessageCircle, ClipboardList } from "lucide-react"
 
-export function FaqCta() {
+interface FaqCtaProps {
+  heading?: string
+  body?: string
+}
+
+export function FaqCta({
+  heading = "Still Have Questions?",
+  body = "Can't find what you're looking for? Our friendly team is happy to help.",
+}: FaqCtaProps) {
   return (
     <section className="py-12 sm:py-16 bg-gray-50" aria-labelledby="faq-cta-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -10,10 +18,10 @@ export function FaqCta() {
           id="faq-cta-heading"
           className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4"
         >
-          Still Have Questions?
+          {heading}
         </h2>
         <p className="text-lg text-gray-600 mb-8 max-w-xl mx-auto">
-          Can&apos;t find what you&apos;re looking for? Our friendly team is happy to help.
+          {body}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button

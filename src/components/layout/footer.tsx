@@ -20,7 +20,17 @@ const serviceLinks = [
   { label: "Community Nursing", href: "/services#nursing" },
 ];
 
-export function Footer() {
+interface FooterProps {
+  phone?: string
+  email?: string
+  abn?: string
+}
+
+export function Footer({
+  phone = "1300 XXX XXX",
+  email = "info@careinourhand.com.au",
+  abn = "XX XXX XXX XXX",
+}: FooterProps) {
   return (
     <footer className="bg-[#0f0a1a] text-gray-300" aria-label="Site footer">
       {/* Main footer grid */}
@@ -125,22 +135,22 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="tel:1300XXXXXX"
+                  href={`tel:${phone.replace(/\s/g, "")}`}
                   className="flex items-center gap-2.5 text-sm text-gray-400 hover:text-[#89C541] transition-colors"
-                  aria-label="Call us on 1300 XXX XXX"
+                  aria-label={`Call us on ${phone}`}
                 >
                   <Phone className="size-4 shrink-0 text-[#89C541]" aria-hidden="true" />
-                  1300 XXX XXX
+                  {phone}
                 </a>
               </li>
               <li>
                 <a
-                  href="mailto:info@careinourhand.com.au"
+                  href={`mailto:${email}`}
                   className="flex items-center gap-2.5 text-sm text-gray-400 hover:text-[#89C541] transition-colors"
-                  aria-label="Email us at info@careinourhand.com.au"
+                  aria-label={`Email us at ${email}`}
                 >
                   <Mail className="size-4 shrink-0 text-[#89C541]" aria-hidden="true" />
-                  info@careinourhand.com.au
+                  {email}
                 </a>
               </li>
             </ul>
@@ -157,7 +167,7 @@ export function Footer() {
               NDIS Registered Provider
             </span>
             <span className="text-white/20" aria-hidden="true">|</span>
-            <span>ABN: XX XXX XXX XXX</span>
+            <span>ABN: {abn}</span>
             <span className="text-white/20" aria-hidden="true">|</span>
             <span className="flex items-center gap-1.5">
               <CheckCircle className="size-3.5 text-[#89C541]" aria-hidden="true" />

@@ -2,7 +2,15 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { HelpCircle } from "lucide-react";
 
-export function ServicesCta() {
+interface ServicesCtaProps {
+  heading?: string
+  body?: string
+}
+
+export function ServicesCta({
+  heading = "Not Sure Which Service You Need?",
+  body = "Our team can help match you with the right support. Get in touch for a free consultation.",
+}: ServicesCtaProps) {
   return (
     <section
       className="relative overflow-hidden py-16 sm:py-20"
@@ -38,13 +46,12 @@ export function ServicesCta() {
           id="services-cta-heading"
           className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 leading-tight"
         >
-          Not Sure Which Service You Need?
+          {heading}
         </h2>
 
         {/* Subtext */}
         <p className="text-gray-800 text-base sm:text-lg leading-relaxed mb-8 max-w-xl mx-auto">
-          Our team can help match you with the right support. Get in touch for a
-          free consultation.
+          {body}
         </p>
 
         {/* Buttons */}

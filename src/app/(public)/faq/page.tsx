@@ -7,6 +7,7 @@ import { FaqHero } from "@/components/faq/faq-hero"
 import { FaqAccordion } from "@/components/faq/faq-accordion"
 import { FaqCta } from "@/components/faq/faq-cta"
 import { getPageHeader } from "@/lib/page-header"
+import { getPageContent } from "@/lib/page-content"
 
 export const metadata: Metadata = {
   title: "FAQ | Care In Our Hand",
@@ -15,12 +16,15 @@ export const metadata: Metadata = {
 }
 
 export default async function FaqPage() {
-  const pageHeader = await getPageHeader("faq");
+  const [pageHeader, content] = await Promise.all([
+    getPageHeader("faq"),
+    getPageContent("faq"),
+  ]);
   return (
     <>
       <FaqHero pageHeader={pageHeader} />
       <FaqAccordion />
-      <FaqCta />
+      <FaqCta heading={content.cta?.heading} body={content.cta?.body} />
     </>
   )
 }

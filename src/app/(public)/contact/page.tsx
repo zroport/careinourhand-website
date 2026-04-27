@@ -7,6 +7,7 @@ import { ContactPageHero } from "@/components/contact/page-hero"
 import { ContactForm } from "@/components/contact/contact-form"
 import { ContactInfo } from "@/components/contact/contact-info"
 import { getPageHeader } from "@/lib/page-header"
+import { getPageContent } from "@/lib/page-content"
 
 export const metadata: Metadata = {
   title: "Contact Us | Care In Our Hand",
@@ -21,7 +22,10 @@ export const metadata: Metadata = {
 }
 
 export default async function ContactPage() {
-  const pageHeader = await getPageHeader("contact");
+  const [pageHeader, content] = await Promise.all([
+    getPageHeader("contact"),
+    getPageContent("contact"),
+  ]);
   return (
     <>
       <ContactPageHero pageHeader={pageHeader} />
@@ -36,7 +40,14 @@ export default async function ContactPage() {
               <ContactForm />
             </div>
             <div>
-              <ContactInfo />
+              <ContactInfo
+                address={content.info?.address}
+                phone={content.info?.phone}
+                email={content.info?.email}
+                hoursWeekday={content.info?.hoursWeekday}
+                hoursSaturday={content.info?.hoursSaturday}
+                hoursSunday={content.info?.hoursSunday}
+              />
             </div>
           </div>
         </div>

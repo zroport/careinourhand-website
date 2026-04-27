@@ -2,6 +2,8 @@
 
 import { z } from "zod"
 import { prisma } from "@/lib/prisma"
+import { sendEmail, adminEmail } from "@/lib/email"
+import { newReferralAdmin } from "@/lib/email-templates"
 type ManagementType = "SELF_MANAGED" | "PLAN_MANAGED" | "NDIA_MANAGED"
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -110,6 +112,21 @@ export async function submitReferral(data: ReferralFormData): Promise<ReferralAc
               servicesNeeded: v.servicesNeeded.join(", "),
               additionalNotes: v.additionalNotes || null,
             },
+    })
+
+    const baseUrl = process.env.NEXTAUTH_URL ?? "http://localhost:3000"
+
+    await sendEmail({
+      to: adminEmail(),
+      ...newReferralAdmin({
+        id: referral.id,
+        participantName: referral.participantName,
+        coordinatorName: referral.coordinatorName,
+        coordinatorOrg: referral.coordinatorOrg,
+        coordinatorEmail: referral.coordinatorEmail,
+        servicesNeeded: referral.servicesNeeded,
+        adminUrl: `${baseUrl}/admin/referrals`,
+      }),
     })
 
     return { success: true, id: referral.id }

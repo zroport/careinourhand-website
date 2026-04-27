@@ -10,6 +10,7 @@ export const authConfig = {
       const isLoggedIn = !!auth?.user
       const isOnAdmin = nextUrl.pathname.startsWith("/admin")
       const isOnLogin = nextUrl.pathname === "/admin/login"
+      const isOnSetupPassword = nextUrl.pathname === "/admin/setup-password"
 
       if (isOnLogin) {
         if (isLoggedIn) {
@@ -17,6 +18,8 @@ export const authConfig = {
         }
         return true
       }
+
+      if (isOnSetupPassword) return true
 
       if (isOnAdmin) {
         if (isLoggedIn) return true

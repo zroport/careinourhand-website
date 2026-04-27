@@ -2,7 +2,15 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { MessageCircle } from "lucide-react";
 
-export function AboutCta() {
+interface AboutCtaProps {
+  heading?: string
+  body?: string
+}
+
+export function AboutCta({
+  heading = "Want to Know More?",
+  body = "We'd love to tell you more about how we can support you or your loved one.",
+}: AboutCtaProps) {
   return (
     <section
       className="relative overflow-hidden bg-[#620E87] py-16 sm:py-20"
@@ -38,13 +46,12 @@ export function AboutCta() {
           id="about-cta-heading"
           className="text-3xl sm:text-4xl font-bold text-white mb-4 leading-tight"
         >
-          Want to Know More?
+          {heading}
         </h2>
 
         {/* Subtext */}
         <p className="text-purple-200 text-base sm:text-lg leading-relaxed mb-8 max-w-xl mx-auto">
-          We&apos;d love to tell you more about how we can support you or your
-          loved one.
+          {body}
         </p>
 
         {/* Buttons */}

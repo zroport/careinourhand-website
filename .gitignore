@@ -45,3 +45,5 @@ next-env.d.ts
 # Uploaded files (served locally; will migrate to MinIO)
 /public/uploads/*
 !/public/uploads/.gitkeep
+# Added by code-review-graph
+.code-review-graph/

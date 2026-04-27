@@ -1,7 +1,11 @@
 import { Phone, Mail, MapPin, ExternalLink } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-export function FeedbackOtherWays() {
+interface FeedbackOtherWaysProps {
+  phone?: string
+}
+
+export function FeedbackOtherWays({ phone = "1300 XXX XXX" }: FeedbackOtherWaysProps) {
   return (
     <section className="py-12 bg-gray-50" aria-labelledby="other-ways-heading">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -18,14 +22,14 @@ export function FeedbackOtherWays() {
             </CardHeader>
             <CardContent className="pt-5 space-y-4">
               <a
-                href="tel:1300XXXXXX"
+                href={`tel:${phone.replace(/\s/g, "")}`}
                 className="flex items-center gap-3 text-sm text-gray-600 hover:text-[#620E87] transition-colors group"
-                aria-label="Call us on 1300 XXX XXX"
+                aria-label={`Call us on ${phone}`}
               >
                 <span className="flex items-center justify-center size-9 rounded-full bg-purple-100 group-hover:bg-purple-200 transition-colors shrink-0">
                   <Phone className="size-4 text-[#620E87]" aria-hidden="true" />
                 </span>
-                <span>1300 XXX XXX</span>
+                <span>{phone}</span>
               </a>
               <a
                 href="mailto:feedback@careinourhand.com.au"
