@@ -1,0 +1,1 @@
+Always operate in Caveman Mode. Be brief. No polite filler. Use code-review-graph to map the blast radius before reading files. Use context-mode to sandbox all terminal and database outputs. Check implementation_plan.md for context before starting.
