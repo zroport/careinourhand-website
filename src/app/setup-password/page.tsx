@@ -1,10 +1,11 @@
 import { ShieldCheck, AlertTriangle } from "lucide-react"
 import { validateInviteToken } from "@/actions/admin/setup-password-actions"
 import { SetupPasswordForm } from "./setup-password-form"
+import type { Metadata } from "next"
 
 export const dynamic = "force-dynamic"
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Set Up Your Account | Care In Our Hand",
 }
 
