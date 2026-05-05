@@ -139,3 +139,25 @@ export async function changeUserRole(
     return { success: false, error: "Something went wrong. Please try again." }
   }
 }
+
+export async function deleteUser(id: string): Promise<UserActionResult> {
+  const session = await requireUserManagement()
+
+  const role = session.user.role as UserRole
+  if (role !== UserRole.SUPER_ADMIN) {
+    return { success: false, error: "Only Super Admins can delete users." }
+  }
+
+  if (session.user.id === id) {
+    return { success: false, error: "Cannot delete your own account." }
+  }
+
+  try {
+    await prisma.user.delete({ where: { id } })
+    revalidatePath("/admin/users")
+    return { success: true }
+  } catch (err) {
+    console.error("deleteUser error:", err)
+    return { success: false, error: "Something went wrong. Please try again." }
+  }
+}

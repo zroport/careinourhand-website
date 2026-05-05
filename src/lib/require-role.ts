@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation"
 import { auth } from "@/lib/auth"
-import { canAccess, type Module } from "@/lib/permissions"
+import { type Module } from "@/lib/permissions"
+import { getAllowedModulesAsync } from "@/lib/permissions-server"
 import { UserRole } from "@prisma/client"
 
 export async function requireRole(module: Module) {
@@ -8,7 +9,8 @@ export async function requireRole(module: Module) {
   if (!session?.user) redirect("/admin/login")
 
   const role = session.user.role as UserRole
-  if (!canAccess(role, module)) redirect("/admin")
+  const allowed = await getAllowedModulesAsync(role)
+  if (!allowed.includes(module)) redirect("/admin")
 
   return session
 }

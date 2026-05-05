@@ -25,6 +25,7 @@ import {
   FolderOpen,
   ImageIcon,
   MapPin,
+  ShieldCheck,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { SignOutButton } from "@/components/admin/sign-out-button"
@@ -81,6 +82,7 @@ const navSections: NavSection[] = [
     items: [
       { label: "Site Settings", href: "/admin/settings", icon: Settings, module: "settings" },
       { label: "User Management", href: "/admin/users", icon: Users, module: "users" },
+      { label: "Role Permissions", href: "/admin/roles", icon: ShieldCheck, module: "roles" },
     ],
   },
 ]
@@ -89,6 +91,7 @@ interface SidebarProps {
   userName?: string | null
   userEmail?: string | null
   userRole?: UserRole | null
+  allowedModules?: Module[]
 }
 
 function NavLink({ item }: { item: NavItem }) {
@@ -120,14 +123,17 @@ interface SidebarContentProps {
   userName?: string | null
   userEmail?: string | null
   userRole?: UserRole | null
+  allowedModules?: Module[]
 }
 
-function SidebarContent({ userName, userEmail, userRole }: SidebarContentProps) {
+function SidebarContent({ userName, userEmail, userRole, allowedModules }: SidebarContentProps) {
   const filteredSections = navSections
     .map((section) => ({
       ...section,
-      items: section.items.filter(
-        (item) => !userRole || canAccess(userRole, item.module)
+      items: section.items.filter((item) =>
+        allowedModules
+          ? allowedModules.includes(item.module)
+          : !userRole || canAccess(userRole, item.module)
       ),
     }))
     .filter((section) => section.items.length > 0)
@@ -185,7 +191,7 @@ function SidebarContent({ userName, userEmail, userRole }: SidebarContentProps) 
   )
 }
 
-export function AdminSidebar({ userName, userEmail, userRole }: SidebarProps) {
+export function AdminSidebar({ userName, userEmail, userRole, allowedModules }: SidebarProps) {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
@@ -223,7 +229,7 @@ export function AdminSidebar({ userName, userEmail, userRole }: SidebarProps) {
         >
           <X className="w-5 h-5 text-gray-600" aria-hidden="true" />
         </button>
-        <SidebarContent userName={userName} userEmail={userEmail} userRole={userRole} />
+        <SidebarContent userName={userName} userEmail={userEmail} userRole={userRole} allowedModules={allowedModules}  />
       </aside>
 
       {/* Desktop sidebar */}
@@ -231,7 +237,7 @@ export function AdminSidebar({ userName, userEmail, userRole }: SidebarProps) {
         className="hidden lg:flex flex-col w-64 shrink-0 admin-sidebar-bg glass-card rounded-none border-r h-screen sticky top-0"
         aria-label="Admin sidebar"
       >
-        <SidebarContent userName={userName} userEmail={userEmail} userRole={userRole} />
+        <SidebarContent userName={userName} userEmail={userEmail} userRole={userRole} allowedModules={allowedModules} />
       </aside>
     </>
   )
