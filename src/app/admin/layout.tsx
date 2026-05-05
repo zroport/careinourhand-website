@@ -1,6 +1,7 @@
 import { auth } from "@/lib/auth"
 import { AdminSidebar } from "@/components/admin/sidebar"
 import { AdminTopBar } from "@/components/admin/topbar"
+import { headers } from "next/headers"
 
 export const dynamic = "force-dynamic"
 
@@ -10,10 +11,16 @@ export default async function AdminLayout({
   children: React.ReactNode
 }) {
   const session = await auth()
+  const headersList = await headers()
+  const pathname = headersList.get("x-pathname") ?? ""
 
-  // No session means this is the login page (middleware handles all other cases).
-  // Render children directly so the login page gets a clean, full-screen layout.
-  if (!session?.user) {
+  // Pages that should show without sidebar/navbar
+  const isCleanPage =
+    !session?.user ||
+    pathname.includes("/admin/login") ||
+    pathname.includes("/admin/setup-password")
+
+  if (isCleanPage) {
     return <>{children}</>
   }
 

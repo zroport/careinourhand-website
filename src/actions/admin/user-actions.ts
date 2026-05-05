@@ -77,7 +77,7 @@ export async function inviteUser(data: InviteFormData): Promise<InviteResult> {
     })
 
     const baseUrl = process.env.NEXTAUTH_URL ?? "http://localhost:3000"
-    const setupUrl = `${baseUrl}/admin/setup-password?token=${token}`
+    const setupUrl = `${baseUrl}/setup-password?token=${token}`
 
     // Send invitation email
     const emailTemplate = invitationEmail({
