@@ -44,13 +44,13 @@ export function OurValues() {
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 scroll-hide md:grid md:grid-cols-3 md:overflow-visible md:snap-none md:pb-0 md:gap-6 lg:gap-8">
           {values.map((value) => {
             const Icon = value.icon;
             return (
               <div
                 key={value.title}
-                className="flex flex-col items-center text-center p-8 glass-card shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200"
+                className="flex flex-col items-center text-center p-8 glass-card shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200 snap-start shrink-0 min-w-[280px] md:min-w-0"
               >
                 {/* Icon container */}
                 <div

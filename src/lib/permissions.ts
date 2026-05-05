@@ -16,6 +16,8 @@ export type Module =
   | "page-manager"
   | "testimonials"
   | "media"
+  | "logos"
+  | "service-areas"
   | "settings"
   | "users"
 
@@ -35,7 +37,9 @@ const PERMISSIONS: Record<Module, UserRole[]> = {
   "page-manager": [UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.MARKETING],
   testimonials: [UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.MARKETING],
   media:        [UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.MARKETING],
-  settings:     [UserRole.SUPER_ADMIN, UserRole.ADMIN],
+  logos:          [UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.MARKETING],
+  "service-areas":[UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.MARKETING],
+  settings:       [UserRole.SUPER_ADMIN, UserRole.ADMIN],
   users:        [UserRole.SUPER_ADMIN, UserRole.ADMIN],
 }
 

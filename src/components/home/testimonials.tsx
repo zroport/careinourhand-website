@@ -79,11 +79,11 @@ export async function Testimonials() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 scroll-hide md:grid md:grid-cols-3 md:overflow-visible md:snap-none md:pb-0 md:gap-6">
           {testimonials.map((t) => (
             <Card
               key={t.id}
-              className="relative shadow-sm hover:shadow-md transition-shadow duration-200 overflow-visible glass-card"
+              className="relative shadow-sm hover:shadow-md transition-shadow duration-200 overflow-visible glass-card snap-start shrink-0 min-w-[280px] md:min-w-0"
             >
               <div
                 aria-hidden="true"

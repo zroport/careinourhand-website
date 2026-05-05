@@ -22,7 +22,9 @@ import {
   Users,
   PanelLeft,
   Star,
-  FolderImage,
+  FolderOpen,
+  ImageIcon,
+  MapPin,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { SignOutButton } from "@/components/admin/sign-out-button"
@@ -69,7 +71,9 @@ const navSections: NavSection[] = [
       { label: "Page Headers", href: "/admin/page-headers", icon: Layout, module: "page-headers" },
       { label: "Page Manager", href: "/admin/pages", icon: PanelLeft, module: "page-manager" },
       { label: "Testimonials", href: "/admin/testimonials", icon: Star, module: "testimonials" },
-      { label: "Media Library", href: "/admin/media", icon: FolderImage, module: "media" },
+      { label: "Media Library", href: "/admin/media", icon: FolderOpen, module: "media" },
+      { label: "Logo Manager", href: "/admin/logos", icon: ImageIcon, module: "logos" },
+      { label: "Service Areas", href: "/admin/service-areas", icon: MapPin, module: "service-areas" },
     ],
   },
   {

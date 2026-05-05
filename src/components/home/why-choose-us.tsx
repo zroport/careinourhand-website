@@ -45,13 +45,13 @@ export function WhyChooseUs() {
         </div>
 
         {/* Feature columns */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 scroll-hide md:grid md:grid-cols-3 md:overflow-visible md:snap-none md:pb-0 md:gap-6">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
               <div
                 key={feature.title}
-                className="relative flex flex-col items-center text-center p-8 glass-card hover:shadow-lg transition-all duration-200 group"
+                className="relative flex flex-col items-center text-center p-8 glass-card hover:shadow-lg transition-all duration-200 group snap-start shrink-0 min-w-[280px] md:min-w-0"
               >
                 {/* Step number */}
                 <span

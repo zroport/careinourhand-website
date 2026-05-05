@@ -346,6 +346,34 @@ model PageHeader {
 }
 
 // ============================================
+// SERVICE AREAS (Coverage suburbs, admin-managed)
+// ============================================
+
+model ServiceArea {
+  id        String   @id @default(cuid())
+  areaName  String
+  isActive  Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================
+// SITE LOGOS (Admin-managed logo variants)
+// ============================================
+
+model SiteLogos {
+  id                String   @id @default(cuid())
+  siteId            String   @default("default")
+  faviconUrl        String?
+  horizontalLogoUrl String?
+  verticalLogoUrl   String?
+  footerLogoUrl     String?
+  fullHeaderLogoUrl String?
+  updatedAt         DateTime @updatedAt
+}
+
+// ============================================
 // TESTIMONIALS
 // ============================================
 

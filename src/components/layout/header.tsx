@@ -33,11 +33,13 @@ const navLinks = [
 interface HeaderProps {
   phone?: string
   email?: string
+  logoUrl?: string | null
 }
 
 export function Header({
   phone = "1300 XXX XXX",
   email = "info@careinourhand.com.au",
+  logoUrl,
 }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
@@ -88,12 +90,23 @@ export function Header({
               className="flex items-center gap-2 shrink-0"
               aria-label="Care In Our Hand — Home"
             >
-              <span className="flex items-center justify-center size-8 rounded-lg bg-[#620E87]">
-                <Heart className="size-4 text-white" aria-hidden="true" />
-              </span>
-              <span className="text-[#620E87] font-bold text-lg leading-tight hidden sm:block">
-                Care In Our Hand
-              </span>
+              {logoUrl ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={logoUrl}
+                  alt="Care In Our Hand"
+                  className="h-10 w-auto object-contain"
+                />
+              ) : (
+                <>
+                  <span className="flex items-center justify-center size-8 rounded-lg bg-[#620E87]">
+                    <Heart className="size-4 text-white" aria-hidden="true" />
+                  </span>
+                  <span className="text-[#620E87] font-bold text-lg leading-tight hidden sm:block">
+                    Care In Our Hand
+                  </span>
+                </>
+              )}
             </Link>
 
             {/* Desktop nav links */}

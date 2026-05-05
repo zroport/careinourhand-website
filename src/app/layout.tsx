@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { getLogos } from "@/lib/logos";
 
 export const metadata: Metadata = {
   title: {
@@ -16,13 +17,19 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const logos = await getLogos();
+  const faviconUrl = logos?.faviconUrl ?? "/favicon.ico";
+
   return (
     <html lang="en" className="h-full antialiased">
+      <head>
+        <link rel="icon" href={faviconUrl} />
+      </head>
       <body className="min-h-full flex flex-col font-sans">
         {children}
       </body>

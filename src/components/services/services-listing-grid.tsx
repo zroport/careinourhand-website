@@ -33,13 +33,13 @@ export function ServicesListingGrid() {
 
         {/* Services grid */}
         <ul
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 scroll-hide sm:grid sm:grid-cols-2 sm:overflow-visible sm:snap-none sm:pb-0 sm:gap-6 lg:grid-cols-3"
           role="list"
         >
           {services.map((service) => {
             const Icon = iconMap[service.icon];
             return (
-              <li key={service.slug}>
+              <li key={service.slug} className="snap-start shrink-0 min-w-[280px] sm:min-w-0">
                 <Link
                   href={`/services/${service.slug}`}
                   className="block h-full group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#620E87] focus-visible:ring-offset-2 rounded-2xl"

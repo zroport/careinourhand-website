@@ -199,6 +199,9 @@ p {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.scroll-hide::-webkit-scrollbar { display: none; }
+.scroll-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
 /* ─── Section spacing compression ────────────────────────────────────────── */
 /* Compress py-20/py-24 sections to py-16 desktop / py-12 mobile */
 

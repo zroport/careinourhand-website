@@ -5,6 +5,7 @@ const quickLinks = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
   { label: "Services", href: "/services" },
+  { label: "Areas We Serve", href: "/#service-areas" },
   { label: "Careers", href: "/careers" },
   { label: "FAQ", href: "/faq" },
   { label: "Blog", href: "/blog" },
@@ -24,12 +25,14 @@ interface FooterProps {
   phone?: string
   email?: string
   abn?: string
+  logoUrl?: string | null
 }
 
 export function Footer({
   phone = "1300 XXX XXX",
   email = "info@careinourhand.com.au",
   abn = "XX XXX XXX XXX",
+  logoUrl,
 }: FooterProps) {
   return (
     <footer className="bg-[#0f0a1a] text-gray-300" aria-label="Site footer">
@@ -43,12 +46,23 @@ export function Footer({
               className="flex items-center gap-2 group"
               aria-label="Care In Our Hand — Home"
             >
-              <span className="flex items-center justify-center size-9 rounded-lg bg-[#620E87] group-hover:bg-[#4e0b6b] transition-colors">
-                <Heart className="size-5 text-white" aria-hidden="true" />
-              </span>
-              <span className="text-white font-bold text-lg leading-tight">
-                Care In Our Hand
-              </span>
+              {logoUrl ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={logoUrl}
+                  alt="Care In Our Hand"
+                  className="h-10 w-auto object-contain"
+                />
+              ) : (
+                <>
+                  <span className="flex items-center justify-center size-9 rounded-lg bg-[#620E87] group-hover:bg-[#4e0b6b] transition-colors">
+                    <Heart className="size-5 text-white" aria-hidden="true" />
+                  </span>
+                  <span className="text-white font-bold text-lg leading-tight">
+                    Care In Our Hand
+                  </span>
+                </>
+              )}
             </Link>
             <p className="text-[#89C541] font-medium italic text-sm">
               "Your Life, In Caring Hands."

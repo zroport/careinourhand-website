@@ -45,13 +45,13 @@ export function CareersBenefits() {
         <p className="text-gray-600 text-center mb-10 max-w-xl mx-auto">
           We invest in our team because great support starts with great workers.
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 scroll-hide sm:grid sm:grid-cols-2 sm:overflow-visible sm:snap-none sm:pb-0 sm:gap-6 lg:grid-cols-4">
           {benefits.map((benefit) => {
             const Icon = benefit.icon
             return (
               <Card
                 key={benefit.title}
-                className="text-center hover:shadow-md transition-shadow glass-card"
+                className="text-center hover:shadow-md transition-shadow glass-card snap-start shrink-0 min-w-[280px] sm:min-w-0"
               >
                 <CardContent className="pt-8 pb-7">
                   <div className="flex justify-center mb-4">

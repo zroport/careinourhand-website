@@ -9,6 +9,7 @@ import { AboutPreview } from "@/components/home/about-preview";
 import { ServicesGrid } from "@/components/home/services-grid";
 import { WhyChooseUs } from "@/components/home/why-choose-us";
 import { Testimonials } from "@/components/home/testimonials";
+import { ServiceCoverage } from "@/components/home/service-coverage";
 import { CtaBanner } from "@/components/home/cta-banner";
 import { getPageContent } from "@/lib/page-content";
 
@@ -53,6 +54,7 @@ export default async function Home() {
       <ServicesGrid />
       <WhyChooseUs />
       <Testimonials />
+      <ServiceCoverage />
       <CtaBanner heading={content.cta?.heading} body={content.cta?.body} />
     </>
   );

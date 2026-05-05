@@ -23,9 +23,11 @@ export function BlogGrid({ posts }: BlogGridProps) {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 scroll-hide sm:grid sm:grid-cols-2 sm:overflow-visible sm:snap-none sm:pb-0 sm:gap-6 lg:grid-cols-3 lg:gap-8">
             {posts.map((post) => (
-              <BlogCard key={post.id} post={post} />
+              <div key={post.id} className="snap-start shrink-0 min-w-[280px] sm:min-w-0">
+                <BlogCard post={post} />
+              </div>
             ))}
           </div>
         )}

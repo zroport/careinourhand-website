@@ -41,11 +41,11 @@ export function MeetTheTeam() {
         </div>
 
         {/* Team cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 scroll-hide max-w-2xl mx-auto sm:grid sm:grid-cols-2 sm:overflow-visible sm:snap-none sm:pb-0 sm:gap-6">
           {teamMembers.map((member) => (
             <article
               key={member.name}
-              className="flex flex-col items-center text-center p-8 glass-card hover:shadow-lg transition-all duration-200"
+              className="flex flex-col items-center text-center p-8 glass-card hover:shadow-lg transition-all duration-200 snap-start shrink-0 min-w-[280px] sm:min-w-0"
               aria-label={`${member.name}, ${member.role}`}
             >
               {/* Avatar placeholder */}
