@@ -60,7 +60,7 @@ model Invitation {
   id        String   @id @default(cuid())
   email     String
   name      String?
-  roleId    UserRole
+  roleId    UserRole  @default(STAFF)
   token     String   @unique
   expiresAt DateTime
   isUsed    Boolean  @default(false)
