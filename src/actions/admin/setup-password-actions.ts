@@ -3,6 +3,7 @@
 import { z } from "zod"
 import { prisma } from "@/lib/prisma"
 import bcrypt from "bcryptjs"
+import type { UserRole } from "@prisma/client"
 
 export type TokenValidation =
   | { valid: true; name: string | null; email: string; role: string }
@@ -69,7 +70,7 @@ export async function completeSetup(data: {
         data: {
           email: invitation.email,
           name: invitation.name,
-          role: invitation.roleId,
+          role: invitation.roleId as UserRole,
           password: hashedPassword,
           isActive: true,
         },
