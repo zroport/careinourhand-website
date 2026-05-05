@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { UserRole } from "@prisma/client"
-import { X, Loader2, Copy, Check } from "lucide-react"
+import { X, Loader2, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -48,8 +48,8 @@ interface InviteUserFormProps {
 export function InviteUserForm({ currentUserRole, onClose, onSuccess }: InviteUserFormProps) {
   const [isPending, startTransition] = useTransition()
   const [serverError, setServerError] = useState<string | null>(null)
-  const [setupUrl, setSetupUrl] = useState<string | null>(null)
-  const [copied, setCopied] = useState(false)
+  const [inviteSent, setInviteSent] = useState(false)
+  const [invitedEmail, setInvitedEmail] = useState("")
 
   const roles = currentUserRole === UserRole.SUPER_ADMIN
     ? [...INVITABLE_ROLES, UserRole.SUPER_ADMIN]
@@ -71,16 +71,10 @@ export function InviteUserForm({ currentUserRole, onClose, onSuccess }: InviteUs
       if (!result.success) {
         setServerError(result.error)
       } else {
-        setSetupUrl(result.setupUrl)
+        setInvitedEmail(data.email)
+        setInviteSent(true)
       }
     })
-  }
-
-  const copyLink = async () => {
-    if (!setupUrl) return
-    await navigator.clipboard.writeText(setupUrl)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
   }
 
   return (
@@ -97,26 +91,17 @@ export function InviteUserForm({ currentUserRole, onClose, onSuccess }: InviteUs
           </button>
         </div>
 
-        {setupUrl ? (
-          <div className="px-6 py-6 space-y-4">
+        {inviteSent ? (
+          <div className="px-6 py-8 flex flex-col items-center text-center space-y-4">
+            <CheckCircle className="w-14 h-14 text-green-500" />
+            <h3 className="text-lg font-semibold text-gray-900">Invitation Sent!</h3>
             <p className="text-sm text-gray-600">
-              Invitation created. Share this setup link with the user — it expires in 7 days.
+              An invitation email has been sent to <strong>{invitedEmail}</strong>.
+              They will receive a link to set up their password and access the admin panel.
             </p>
-            <div className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg border">
-              <p className="text-xs text-gray-700 break-all flex-1 font-mono">{setupUrl}</p>
-              <button
-                onClick={copyLink}
-                className="shrink-0 p-1.5 rounded hover:bg-gray-200 transition-colors"
-                aria-label="Copy link"
-              >
-                {copied ? (
-                  <Check className="w-4 h-4 text-green-600" />
-                ) : (
-                  <Copy className="w-4 h-4 text-gray-500" />
-                )}
-              </button>
-            </div>
-            <Button className="w-full" onClick={onSuccess}>Done</Button>
+            <Button className="w-full mt-2" onClick={onSuccess}>
+              Done
+            </Button>
           </div>
         ) : (
           <form onSubmit={handleSubmit(onSubmit)} className="px-6 py-6 space-y-4">
