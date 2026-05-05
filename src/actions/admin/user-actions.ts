@@ -1,5 +1,7 @@
 "use server"
 
+import { sendEmail } from "@/lib/email"
+import { invitationEmail } from "@/lib/email-templates"
 import { z } from "zod"
 import { prisma } from "@/lib/prisma"
 import { revalidatePath } from "next/cache"
@@ -76,6 +78,19 @@ export async function inviteUser(data: InviteFormData): Promise<InviteResult> {
 
     const baseUrl = process.env.NEXTAUTH_URL ?? "http://localhost:3000"
     const setupUrl = `${baseUrl}/admin/setup-password?token=${token}`
+
+    // Send invitation email
+    const emailTemplate = invitationEmail({
+      name,
+      email,
+      role: role.replace(/_/g, " "),
+      setupUrl,
+    })
+    await sendEmail({
+      to: email,
+      subject: emailTemplate.subject,
+      html: emailTemplate.html,
+    })
 
     revalidatePath("/admin/users")
     return { success: true, setupUrl }

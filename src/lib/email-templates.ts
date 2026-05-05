@@ -202,3 +202,21 @@ export function bookingConfirmed(b: {
     ),
   }
 }
+export function invitationEmail(i: {
+  name: string
+  email: string
+  role: string
+  setupUrl: string
+}): { subject: string; html: string } {
+  return {
+    subject: "You've been invited to Care In Our Hand Admin",
+    html: layout(
+      "Admin Invitation",
+      `${heading(`Hi ${i.name},`)}
+      <p style="color:#555;font-size:14px;margin:0 0 16px;">You have been invited to join the <strong>Care In Our Hand</strong> admin panel as <strong>${i.role}</strong>.</p>
+      <p style="color:#555;font-size:14px;margin:0 0 16px;">Click the button below to set up your password and access your account. This link expires in <strong>7 days</strong>.</p>
+      ${button("Set Up My Account", i.setupUrl)}
+      <p style="color:#999;font-size:12px;margin:20px 0 0;">If you did not expect this invitation, you can safely ignore this email.</p>`
+    ),
+  }
+}
