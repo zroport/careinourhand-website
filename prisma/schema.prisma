@@ -1,6 +1,3 @@
-// prisma/schema.prisma
-// Care In Our Hand - NDIS Provider Website Database Schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -9,10 +6,6 @@ datasource db {
   provider = "postgresql"
 }
 
-// ============================================
-// AUTHENTICATION (NextAuth.js)
-// ============================================
-
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -20,13 +13,13 @@ model User {
   emailVerified DateTime?
   password      String?
   role          UserRole  @default(STAFF)
-  isActive      Boolean   @default(true)
   image         String?
-  accounts      Account[]
-  sessions      Session[]
-  pagesEdited   Page[]    @relation("LastEditedBy")
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+  isActive      Boolean   @default(true)
+  accounts      Account[]
+  pagesEdited   Page[]    @relation("LastEditedBy")
+  sessions      Session[]
 }
 
 model Account {
@@ -63,18 +56,6 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-enum UserRole {
-  SUPER_ADMIN
-  ADMIN
-  STAFF
-  MARKETING
-  ACCOUNTS
-}
-
-// ============================================
-// INVITATIONS (Secure onboarding)
-// ============================================
-
 model Invitation {
   id        String   @id @default(cuid())
   email     String
@@ -87,10 +68,6 @@ model Invitation {
   updatedAt DateTime @updatedAt
 }
 
-// ============================================
-// PAGE MANAGER (Centralized content)
-// ============================================
-
 model Page {
   id              String   @id @default(cuid())
   slug            String   @unique
@@ -99,14 +76,10 @@ model Page {
   metaTitle       String?
   metaDescription String?
   lastEditedById  String?
-  lastEditedBy    User?    @relation("LastEditedBy", fields: [lastEditedById], references: [id])
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+  lastEditedBy    User?    @relation("LastEditedBy", fields: [lastEditedById], references: [id])
 }
-
-// ============================================
-// SERVICES
-// ============================================
 
 model Service {
   id          String   @id @default(cuid())
@@ -116,52 +89,30 @@ model Service {
   description String
   icon        String?
   image       String?
-  brochureUrl String?
   order       Int      @default(0)
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  brochureUrl String?
 }
-
-// ============================================
-// REFERRALS (Support Coordinators)
-// ============================================
 
 model Referral {
-  id                String          @id @default(cuid())
-  participantName   String
-  participantPhone  String?
-  participantEmail  String?
-  ndisNumber        String?
-  managementType    ManagementType?
-  coordinatorName   String?
-  coordinatorOrg    String?
-  coordinatorPhone  String?
-  coordinatorEmail  String?
-  servicesNeeded    String?
-  additionalNotes   String?
-  status            ReferralStatus  @default(NEW)
-  createdAt         DateTime        @default(now())
-  updatedAt         DateTime        @updatedAt
+  id               String          @id @default(cuid())
+  participantName  String
+  participantPhone String?
+  participantEmail String?
+  ndisNumber       String?
+  managementType   ManagementType?
+  coordinatorName  String?
+  coordinatorOrg   String?
+  coordinatorPhone String?
+  coordinatorEmail String?
+  servicesNeeded   String?
+  additionalNotes  String?
+  status           ReferralStatus  @default(NEW)
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
 }
-
-enum ManagementType {
-  SELF_MANAGED
-  PLAN_MANAGED
-  NDIA_MANAGED
-}
-
-enum ReferralStatus {
-  NEW
-  IN_REVIEW
-  CONTACTED
-  ACCEPTED
-  DECLINED
-}
-
-// ============================================
-// BOOKINGS (Direct Clients)
-// ============================================
 
 model Booking {
   id            String        @id @default(cuid())
@@ -178,17 +129,6 @@ model Booking {
   updatedAt     DateTime      @updatedAt
 }
 
-enum BookingStatus {
-  PENDING
-  CONFIRMED
-  COMPLETED
-  CANCELLED
-}
-
-// ============================================
-// CONTACT FORM (General Inquiries)
-// ============================================
-
 model ContactMessage {
   id        String   @id @default(cuid())
   name      String
@@ -200,56 +140,32 @@ model ContactMessage {
   createdAt DateTime @default(now())
 }
 
-// ============================================
-// FEEDBACK & COMPLAINTS (NDIS Requirement)
-// ============================================
-
 model Feedback {
-  id          String       @id @default(cuid())
+  id          String         @id @default(cuid())
   name        String?
   email       String?
   phone       String?
   type        FeedbackType
   message     String
-  isAnonymous Boolean      @default(false)
+  isAnonymous Boolean        @default(false)
   status      FeedbackStatus @default(RECEIVED)
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
 }
-
-enum FeedbackType {
-  COMPLIMENT
-  SUGGESTION
-  COMPLAINT
-}
-
-enum FeedbackStatus {
-  RECEIVED
-  INVESTIGATING
-  RESOLVED
-}
-
-// ============================================
-// BLOG / NEWS
-// ============================================
 
 model BlogPost {
-  id          String      @id @default(cuid())
+  id          String    @id @default(cuid())
   title       String
-  slug        String      @unique
+  slug        String    @unique
   excerpt     String?
   content     String
   coverImage  String?
-  author      String      @default("Care In Our Hand")
-  isPublished Boolean     @default(false)
+  author      String    @default("Care In Our Hand")
+  isPublished Boolean   @default(false)
   publishedAt DateTime?
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
-
-// ============================================
-// FAQ
-// ============================================
 
 model Faq {
   id        String   @id @default(cuid())
@@ -260,10 +176,6 @@ model Faq {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
-
-// ============================================
-// CAREERS / JOB LISTINGS
-// ============================================
 
 model JobListing {
   id           String   @id @default(cuid())
@@ -278,19 +190,15 @@ model JobListing {
 }
 
 model JobApplication {
-  id         String   @id @default(cuid())
-  jobId      String?
-  fullName   String
-  email      String
-  phone      String
-  resume     String?
-  coverNote  String?
-  createdAt  DateTime @default(now())
+  id        String   @id @default(cuid())
+  jobId     String?
+  fullName  String
+  email     String
+  phone     String
+  resume    String?
+  coverNote String?
+  createdAt DateTime @default(now())
 }
-
-// ============================================
-// MEDIA LIBRARY
-// ============================================
 
 model Media {
   id        String   @id @default(cuid())
@@ -302,20 +210,11 @@ model Media {
   createdAt DateTime @default(now())
 }
 
-// ============================================
-// SITE SETTINGS (Admin-editable)
-// ============================================
-
 model SiteSetting {
   id    String @id @default(cuid())
   key   String @unique
   value String
 }
-
-// ============================================
-// HERO SLIDER
-// Run `npx prisma db push` after adding this model to apply it to the database.
-// ============================================
 
 model HeroSlide {
   id         String   @id @default(cuid())
@@ -330,11 +229,6 @@ model HeroSlide {
   updatedAt  DateTime @updatedAt
 }
 
-// ============================================
-// PAGE HEADERS (Admin-editable hero sections)
-// Run `npx prisma db push` after adding this model to apply it to the database.
-// ============================================
-
 model PageHeader {
   id         String   @id @default(cuid())
   pageSlug   String   @unique
@@ -345,10 +239,6 @@ model PageHeader {
   updatedAt  DateTime @updatedAt
 }
 
-// ============================================
-// SERVICE AREAS (Coverage suburbs, admin-managed)
-// ============================================
-
 model ServiceArea {
   id        String   @id @default(cuid())
   areaName  String
@@ -357,10 +247,6 @@ model ServiceArea {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
-
-// ============================================
-// SITE LOGOS (Admin-managed logo variants)
-// ============================================
 
 model SiteLogos {
   id                String   @id @default(cuid())
@@ -373,10 +259,6 @@ model SiteLogos {
   updatedAt         DateTime @updatedAt
 }
 
-// ============================================
-// TESTIMONIALS
-// ============================================
-
 model Testimonial {
   id        String   @id @default(cuid())
   name      String
@@ -387,4 +269,45 @@ model Testimonial {
   order     Int      @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  STAFF
+  MARKETING
+  ACCOUNTS
+}
+
+enum ManagementType {
+  SELF_MANAGED
+  PLAN_MANAGED
+  NDIA_MANAGED
+}
+
+enum ReferralStatus {
+  NEW
+  IN_REVIEW
+  CONTACTED
+  ACCEPTED
+  DECLINED
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+}
+
+enum FeedbackType {
+  COMPLIMENT
+  SUGGESTION
+  COMPLAINT
+}
+
+enum FeedbackStatus {
+  RECEIVED
+  INVESTIGATING
+  RESOLVED
 }
