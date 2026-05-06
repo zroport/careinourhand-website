@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import { ImageUpload } from "@/components/admin/ImageUpload"
 
 interface HeroSlide {
   id: string
@@ -165,15 +166,11 @@ export default function SlidesClient({ slides: initialSlides }: Props) {
                   placeholder="e.g. NDIS services you can trust"
                 />
               </div>
-              <div>
-                <label className="text-sm font-medium text-gray-700">Image URL</label>
-                <input
-                  className="mt-1 w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  value={form.imageUrl}
-                  onChange={(e) => setForm({ ...form, imageUrl: e.target.value })}
-                  placeholder="/uploads/hero1.jpg"
-                />
-              </div>
+              <ImageUpload
+                label="Background Image"
+                value={form.imageUrl}
+                onChange={(url) => setForm({ ...form, imageUrl: url })}
+              />
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="text-sm font-medium text-gray-700">Button Text</label>
