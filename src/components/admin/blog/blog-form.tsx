@@ -13,6 +13,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { createBlogPost } from "@/actions/admin/create-blog"
 import { updateBlogPost, toggleBlogPublished } from "@/actions/admin/update-blog"
 import { deleteBlogPost } from "@/actions/admin/delete-blog"
+import { ImageUpload } from "@/components/admin/ImageUpload"
 
 function toSlug(value: string) {
   return value
@@ -68,6 +69,7 @@ export function BlogForm({ mode, postId, defaultValues, isPublished }: BlogFormP
 
   const titleValue = watch("title")
   const excerptValue = watch("excerpt") ?? ""
+  const coverImageValue = watch("coverImage") ?? ""
   const slugTouched = !!defaultValues?.slug
 
   useEffect(() => {
@@ -160,14 +162,11 @@ export function BlogForm({ mode, postId, defaultValues, isPublished }: BlogFormP
           </div>
 
           {/* Cover Image */}
-          <div className="space-y-1.5">
-            <Label htmlFor="coverImage">Cover Image URL</Label>
-            <Input
-              id="coverImage"
-              {...register("coverImage")}
-              placeholder="https://... (MinIO integration coming soon)"
-            />
-          </div>
+          <ImageUpload
+            label="Cover Image"
+            value={coverImageValue}
+            onChange={(url) => setValue("coverImage", url)}
+          />
 
           {/* Author */}
           <div className="space-y-1.5">

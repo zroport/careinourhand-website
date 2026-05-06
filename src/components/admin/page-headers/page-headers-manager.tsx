@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import { ImageUpload } from "@/components/admin/ImageUpload"
 
 export interface PageDefault {
   slug: string
@@ -158,15 +159,11 @@ export function PageHeadersManager({ pages, records }: Props) {
                   placeholder="Page subheading"
                 />
               </div>
-              <div>
-                <label className="text-sm font-medium text-gray-700">Background Image URL</label>
-                <input
-                  className="mt-1 w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  value={form.imageUrl}
-                  onChange={(e) => setForm({ ...form, imageUrl: e.target.value })}
-                  placeholder="/uploads/about-hero.jpg"
-                />
-              </div>
+              <ImageUpload
+                label="Background Image"
+                value={form.imageUrl}
+                onChange={(url) => setForm({ ...form, imageUrl: url })}
+              />
             </div>
             <div className="flex gap-3 mt-5">
               <button
