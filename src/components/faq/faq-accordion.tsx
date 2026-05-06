@@ -3,7 +3,13 @@
 import { useState, useMemo } from "react"
 import { ChevronDown, Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
-import { faqCategories, type FaqItem } from "@/data/faqs"
+
+interface FaqItem {
+  id: string
+  question: string
+  answer: string
+  category: string
+}
 
 function AccordionItem({
   faq,
@@ -49,28 +55,30 @@ function AccordionItem({
   )
 }
 
-export function FaqAccordion() {
+export function FaqAccordion({ faqs }: { faqs: FaqItem[] }) {
   const [openId, setOpenId] = useState<string | null>(null)
   const [search, setSearch] = useState("")
 
   const query = search.trim().toLowerCase()
 
   const filtered = useMemo(() => {
-    if (!query) return faqCategories
-    return faqCategories
-      .map((cat) => ({
-        ...cat,
-        faqs: cat.faqs.filter(
-          (f) =>
-            f.question.toLowerCase().includes(query) ||
-            f.answer.toLowerCase().includes(query)
-        ),
-      }))
-      .filter((cat) => cat.faqs.length > 0)
-  }, [query])
+    if (!query) return faqs
+    return faqs.filter(
+      (f) =>
+        f.question.toLowerCase().includes(query) ||
+        f.answer.toLowerCase().includes(query)
+    )
+  }, [faqs, query])
 
-  const totalResults = filtered.reduce((n, c) => n + c.faqs.length, 0)
-  const totalAll = faqCategories.reduce((n, c) => n + c.faqs.length, 0)
+  const grouped = useMemo(() => {
+    const map = new Map<string, FaqItem[]>()
+    for (const faq of filtered) {
+      const cat = faq.category || "General"
+      if (!map.has(cat)) map.set(cat, [])
+      map.get(cat)!.push(faq)
+    }
+    return Array.from(map.entries()).map(([label, items]) => ({ label, items }))
+  }, [filtered])
 
   const toggle = (id: string) => setOpenId((prev) => (prev === id ? null : id))
 
@@ -108,15 +116,15 @@ export function FaqAccordion() {
               role="status"
               aria-live="polite"
             >
-              {totalResults === 0
+              {filtered.length === 0
                 ? "No questions match your search."
-                : `Showing ${totalResults} of ${totalAll} questions`}
+                : `Showing ${filtered.length} of ${faqs.length} questions`}
             </p>
           )}
         </div>
 
         {/* Categories */}
-        {filtered.length === 0 ? (
+        {grouped.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-gray-500 text-lg">No questions match your search.</p>
             <button
@@ -129,13 +137,13 @@ export function FaqAccordion() {
           </div>
         ) : (
           <div className="space-y-10">
-            {filtered.map((category) => (
-              <div key={category.id}>
+            {grouped.map(({ label, items }) => (
+              <div key={label}>
                 <h3 className="text-lg font-bold text-[#620E87] mb-4 pb-2 border-b-2 border-[#620E87]/20">
-                  {category.label}
+                  {label}
                 </h3>
                 <div className="space-y-3">
-                  {category.faqs.map((faq) => (
+                  {items.map((faq) => (
                     <AccordionItem
                       key={faq.id}
                       faq={faq}

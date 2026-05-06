@@ -8,6 +8,7 @@ import { FaqAccordion } from "@/components/faq/faq-accordion"
 import { FaqCta } from "@/components/faq/faq-cta"
 import { getPageHeader } from "@/lib/page-header"
 import { getPageContent } from "@/lib/page-content"
+import { prisma } from "@/lib/prisma"
 
 export const metadata: Metadata = {
   title: "FAQ | Care In Our Hand",
@@ -16,14 +17,18 @@ export const metadata: Metadata = {
 }
 
 export default async function FaqPage() {
-  const [pageHeader, content] = await Promise.all([
+  const [pageHeader, content, faqs] = await Promise.all([
     getPageHeader("faq"),
     getPageContent("faq"),
+    prisma.faq.findMany({
+      where: { isActive: true },
+      orderBy: { order: "asc" },
+    }),
   ]);
   return (
     <>
       <FaqHero pageHeader={pageHeader} />
-      <FaqAccordion />
+      <FaqAccordion faqs={faqs} />
       <FaqCta heading={content.cta?.heading} body={content.cta?.body} />
     </>
   )
